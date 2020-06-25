@@ -1,0 +1,8 @@
+{
+  "name": "erxp_mobile_v3",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}
