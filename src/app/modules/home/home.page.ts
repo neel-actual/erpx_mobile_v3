@@ -14,9 +14,6 @@ export class HomePage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.home.getListing().then(data => {
-      console.log(data)
-      this.list = data;
-    });
+    this.home.getListing().then(data => this.list = data);
   }
 }
