@@ -9,7 +9,7 @@ export class ConfigService {
   constructor(private platform: Platform) { }
 
   isDesktop() {
-    return this.platform.is('mobileweb');
+    return this.platform.is('mobileweb') || this.platform.is('desktop');
   }
 
   getCookies(source) {

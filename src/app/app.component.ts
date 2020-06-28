@@ -6,7 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import {ConfigService} from './service/config.service';
 import {AuthService} from './service/auth.service';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +21,7 @@ export class AppComponent {
     private config: ConfigService,
     private auth: AuthService,
     private router: Router,
+    private route: ActivatedRoute,
     private loadingController: LoadingController
   ) {
     this.initializeApp();
@@ -36,7 +37,7 @@ export class AppComponent {
     await loading.present();
 
     this.auth.isLoggedIn().then(() => {
-      this.router.navigate([''])
+      // this.router.navigate([''])
     }).catch(() => {
       this.router.navigate(['/login']);
     }).finally(() => {
