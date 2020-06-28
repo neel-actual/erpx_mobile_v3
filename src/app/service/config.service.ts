@@ -44,9 +44,9 @@ export class ConfigService {
     return this.get_service_endpoint() + URL;
   }
 
-  get_service_endpoint() {
+  get_service_endpoint(server = null) {
     // return "http://167.99.77.197:8000";
-    if (this.isDesktop()) {
+    if (!server && this.isDesktop()) {
       return '';
     }
     else { return 'https://www.prulia.org.my'; }

@@ -1,9 +1,17 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>home</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-list>
+    <ion-list-header [hidden]="list.length > 0">No Home Content Setup</ion-list-header>
+    <ion-card *ngFor="let item of list">
+      <img [src]="item.image"/>
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">{{ item.title }}</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+  </ion-list>
 </ion-content>

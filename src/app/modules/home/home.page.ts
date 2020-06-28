@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {HomeService} from "../../service/home.service";
 
 @Component({
   selector: 'app-home',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
+  list: any = [];
 
-  constructor() { }
+  constructor(
+      private home: HomeService
+  ) {}
 
   ngOnInit() {
+    this.home.loadListing().then(data => {
+      this.list = data;
+    });
   }
-
 }
