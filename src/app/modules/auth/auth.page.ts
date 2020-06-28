@@ -23,8 +23,7 @@ export class AuthPage implements OnInit {
     return this.auth.login(username, password).then(data => {
       this.router.navigate(['']);
     }).catch((e) => {
-      console.log(e);
-      var msg = e && e.error && e.error.message;
+      let msg = e && e.error && e.error.message;
 
       if (msg) {
         this.presentAlert('Error!', msg);

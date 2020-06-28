@@ -35,7 +35,7 @@ export class AppComponent {
 
     await loading.present();
 
-    this.auth.if_session_valid().then(() => {
+    this.auth.isLoggedIn().then(() => {
       this.router.navigate([''])
     }).catch(() => {
       this.router.navigate(['/login']);

@@ -6,6 +6,7 @@ import {HttpService} from './http.service';
   providedIn: 'root'
 })
 export class AuthService {
+  user: any = null;
 
   constructor(
     private config: ConfigService,
@@ -51,6 +52,12 @@ export class AuthService {
     //       reject(err);
     //     });
     // });
+  }
+
+  forgetPassword(usr, nric) {
+    let data = {prulia_id: usr, nric_number: nric};
+
+    return this.http.post(this.config.get_api_url('/api/method/erpx_prulia.prulia_members.doctype.prulia_member.prulia_member.forget_password'), data)
   }
 
   if_session_valid() {
