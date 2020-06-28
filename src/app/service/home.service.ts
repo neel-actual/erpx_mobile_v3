@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {ConfigService} from "./config.service";
-import {HttpService} from "./http.service";
+import {ConfigService} from './config.service';
+import {HttpService} from './http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,7 @@ export class HomeService {
   ) { }
 
   loadListing() {
+    // tslint:disable-next-line:max-line-length
     return this.http.get(this.config.get_api_url('/api/method/erpx_prulia.prulia_news.doctype.prulia_home.prulia_home.get_home')).then(res => {
       let data = [];
 
@@ -28,7 +29,7 @@ export class HomeService {
         }
       }
 
-      return data
+      return data;
     });
   }
 }
