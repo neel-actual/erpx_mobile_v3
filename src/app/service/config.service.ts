@@ -8,6 +8,10 @@ export class ConfigService {
 
   constructor(private platform: Platform) { }
 
+  isDesktop() {
+    return this.platform.is('mobileweb');
+  }
+
   getCookies(source) {
     let c = source || document.cookie, v = 0, cookies = {};
     if (document.cookie.match(/^\s*\$Version=(?:"1"|1);\s*(.*)/)) {
@@ -42,7 +46,7 @@ export class ConfigService {
 
   get_service_endpoint() {
     // return "http://167.99.77.197:8000";
-    if (this.platform.is('desktop')) {
+    if (this.isDesktop()) {
       return '';
     }
     else { return 'https://www.prulia.org.my'; }

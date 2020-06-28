@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, LoadingController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import {ConfigService} from './service/config.service';
 import {AuthService} from './service/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -18,26 +19,28 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private config: ConfigService,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router,
+    private loadingController: LoadingController
   ) {
     this.initializeApp();
   }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+  async initializeApp() {
+    await this.platform.ready();
+    this.statusBar.styleDefault();
+    this.splashScreen.hide();
 
-      this.auth.set_sid_cookie();
-      this.auth.if_session_valid().then(data => {
-        console.log(data)
-      }).catch(e => {
-        this.auth.login('0123456', '12345').then(data => {
-          console.log(data);
-        }).catch(e => {
-          console.error(e);
-        })
-      })
-    });
+    let loading = await this.loadingController.create({});
+
+    await loading.present();
+
+    this.auth.if_session_valid().then(() => {
+      this.router.navigate([''])
+    }).catch(() => {
+      this.router.navigate(['/login']);
+    }).finally(() => {
+      loading.dismiss();
+    })
   }
 }

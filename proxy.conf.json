@@ -1,0 +1,8 @@
+{
+  "/api/": {
+    "target": "https://www.prulia.org.my",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

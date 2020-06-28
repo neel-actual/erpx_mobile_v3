@@ -12,10 +12,23 @@ export class AuthService {
     private http: HttpService
   ) { }
 
+  isLoggedIn() {
+    this.set_sid_cookie();
+
+    return this.if_session_valid()
+  }
+
   login (usr, pwd) {
     let credentials = {usr: usr, pwd: pwd, device: "mobile"};
 
-    return this.http.post(this.config.get_api_url('/api/method/login'), credentials, {})
+    return this.http.post(this.config.get_api_url('/api/method/login'), credentials, {}).then(data => {
+      localStorage.user = usr;
+      let cookie = this.config.getCookies(document.cookie);
+      localStorage.session_id = cookie['sid'];
+
+      return data;
+    });
+
     // return new Promise((resolve, reject) => {
     //   this.http.post(this.common.get_api_url('/api/method/login'), credentials, {
     //     observe: 'response',

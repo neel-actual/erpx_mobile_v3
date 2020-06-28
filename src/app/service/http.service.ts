@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HTTP } from '@ionic-native/http/ngx';
 import { HttpClient } from '@angular/common/http';
 import {Platform} from '@ionic/angular';
+import {ConfigService} from './config.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,15 +12,12 @@ export class HttpService {
   constructor(
     private http: HTTP, 
     private httpClient: HttpClient, 
-    private platform: Platform
+    private platform: Platform,
+    private config: ConfigService
     ) { }
 
-  isDesktop() {
-    return this.platform.is('desktop');
-  }
-
   get(url, params = null, header = null) {
-    if (this.isDesktop()) {
+    if (this.config.isDesktop()) {
       return new Promise((resolve, reject) => {
         this.httpClient.get(url, header || {
           observe: 'response',
@@ -32,7 +30,7 @@ export class HttpService {
   }
 
   post(url, data = null, header = null) {
-    if (this.isDesktop()) {
+    if (this.config.isDesktop()) {
       return new Promise((resolve, reject) => {
         this.httpClient.post(url, data, {
           observe: 'response',
