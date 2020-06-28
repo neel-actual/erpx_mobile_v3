@@ -12,16 +12,20 @@ const routes: Routes = [
         loadChildren: () => import('../modules/home/home.module').then(m => m.HomePageModule)
       },
       {
-        path: 'tab1',
-        loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+        path: 'profile',
+        loadChildren: () => import('../modules/profile/profile.module').then(m => m.ProfilePageModule)
       },
       {
-        path: 'tab2',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+        path: 'event',
+        loadChildren: () => import('../modules/event/event.module').then(m => m.EventPageModule)
       },
       {
-        path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+        path: 'training',
+        loadChildren: () => import('../modules/training/training.module').then(m => m.TrainingPageModule)
+      },
+      {
+        path: 'partner',
+        loadChildren: () => import('../modules/partner/partner.module').then(m => m.PartnerPageModule)
       },
       {
         path: '',
