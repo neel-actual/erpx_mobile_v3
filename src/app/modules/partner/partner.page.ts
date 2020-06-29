@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {PartnerService} from "../../service/partner.service";
 
 @Component({
   selector: 'app-partner',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./partner.page.scss'],
 })
 export class PartnerPage implements OnInit {
+  list: any = [];
 
-  constructor() { }
+  constructor(
+      private partner: PartnerService
+  ) { }
 
   ngOnInit() {
+    this.partner.getListing().then(data => this.list = data);
   }
 
 }
