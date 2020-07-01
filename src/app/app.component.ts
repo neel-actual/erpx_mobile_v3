@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 import { Platform, LoadingController } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+import {StatusBar} from "@ionic-native/status-bar/ngx";
+import {SplashScreen} from "@ionic-native/splash-screen/ngx";
 
 import {ConfigService} from './service/config.service';
 import {AuthService} from './service/auth.service';
@@ -29,7 +29,8 @@ export class AppComponent {
 
   async initializeApp() {
     await this.platform.ready();
-    this.statusBar.styleDefault();
+    this.statusBar.overlaysWebView(false);
+    this.statusBar.backgroundColorByHexString('#F1646B');
     this.splashScreen.hide();
 
     let loading = await this.loadingController.create({});

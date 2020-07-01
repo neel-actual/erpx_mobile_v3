@@ -25,7 +25,7 @@ export class HttpService {
         }).subscribe((res: any) => { resolve(res.body); }, (err) => { reject(err) });
       });
     } else {
-      return this.http.get(url, params || {}, params || {});
+      return this.http.get(url, params || {}, params || {}).then(res => res.data ? JSON.parse(res.data) : {});
     }
   }
 
@@ -43,7 +43,7 @@ export class HttpService {
       });
     }
     else {
-      return this.http.post(url, data || {}, header || {}); 
+      return this.http.post(url, data || {}, header || {}).then(res => res.data ? JSON.parse(res.data) : {});
     }
   }
 }
