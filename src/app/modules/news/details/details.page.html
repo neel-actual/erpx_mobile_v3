@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{item?.title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <img [src]="item?.news_image"/>
+  <h1>{{item?.title}}</h1>
+  <p>{{item?.publish_date | date: 'MMM d, y'}}</p>
+  <div class="ion-padding" [innerHtml]="item?.content"></div>
+</ion-content>

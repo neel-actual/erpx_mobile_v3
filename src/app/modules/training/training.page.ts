@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {TrainingService} from "../../service/training.service";
 
 @Component({
   selector: 'app-training',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./training.page.scss'],
 })
 export class TrainingPage implements OnInit {
+  list: any = [];
 
-  constructor() { }
+  constructor(
+      private training: TrainingService
+  ) { }
 
   ngOnInit() {
+    this.training.getListing().then(data => this.list = data);
   }
 
 }

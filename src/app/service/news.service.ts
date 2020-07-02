@@ -38,4 +38,17 @@ export class NewsService {
       return Promise.resolve(this.listing);
     }
   }
+
+  getItem(name) {
+    return this.getListing().then(listing => {
+      let res = null;
+
+      listing.forEach(item => {
+        if (item.name === name) { res = item; }
+      });
+
+      return res;
+    });
+  }
+
 }
