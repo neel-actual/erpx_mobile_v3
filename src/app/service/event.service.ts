@@ -22,7 +22,7 @@ export class EventService {
       return this.http.get(this.config.get_api_url('/api/method/erpx_prulia.prulia_events.doctype.prulia_event.prulia_event.get_event_list'), {
         params: { member_name: member_profile.name }
       }).then(res => {
-
+        console.log(res);
         if (res['message'] instanceof Array) {
           this.listing = res['message'];
         }
@@ -45,5 +45,15 @@ export class EventService {
     }
   }
 
-  updateRegistration () {}
+  getItem(name) {
+    return this.getListing().then(listing => {
+      let res = null;
+
+      listing.forEach(item => {
+        if (item.name === name) { res = item; }
+      });
+
+      return res;
+    });
+  }
 }

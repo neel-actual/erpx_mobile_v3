@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Training Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h3 class="ion-padding"><b>{{ item?.training_name }}</b></h3>
+  <img [src]="item?.training_image"/>
+  <div class="ion-padding" [innerHtml]="item?.description"></div>
+  <ion-list>
+    <ion-item>
+      <ion-icon name="time"></ion-icon>
+      <div class="ion-padding">
+        {{ item?.start_date_time | date: 'MMM d, y, h:mm a'}} -
+        {{ item?.start_date_time.getDate() == item?.end_date_time.getDate() ? (item?.end_date_time | date: 'h:mm a') : (item?.end_date_time | date: 'MMM d, y, h:mm a') }}
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="pin"></ion-icon>
+      <div class="ion-padding">
+        {{ item?.venue }}
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

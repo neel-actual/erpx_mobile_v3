@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ConfigService} from "./config.service";
 import {HttpService} from "./http.service";
+import {MemberService} from "./member.service";
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +11,18 @@ export class TrainingService {
 
   constructor(
       private config: ConfigService,
-      private http: HttpService
+      private http: HttpService,
+      private member: MemberService
   ) { }
 
-  getListing(refresh = false) {
+  async getListing(refresh = false) {
     if (this.listing.length === 0 || refresh) {
-      return this.http.get(this.config.get_api_url('/api/method/erpx_prulia.prulia_trainings.doctype.prulia_training.prulia_training.get_training_list')).then(res => {
+      let member_profile = await this.member.getProfile();
 
+      return this.http.get(this.config.get_api_url('/api/method/erpx_prulia.prulia_trainings.doctype.prulia_training.prulia_training.get_training_list'), {
+        params: { member_name: member_profile.name }
+      }).then(res => {
+        console.log(res);
         if (res['message'] instanceof Array) {
           this.listing = res['message'];
         }
@@ -37,6 +43,18 @@ export class TrainingService {
     else {
       return Promise.resolve(this.listing);
     }
+  }
+
+  getItem(name) {
+    return this.getListing().then(listing => {
+      let res = null;
+
+      listing.forEach(item => {
+        if (item.name === name) { res = item; }
+      });
+
+      return res;
+    });
   }
 
 }
