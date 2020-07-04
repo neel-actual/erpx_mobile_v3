@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Personal Information</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #form="ngForm" (ngSubmit)="update(form)">
+    <ion-grid class="ion-padding">
+      <ion-list>
+        <ion-item>
+          <ion-label position="floating">Name</ion-label>
+          <ion-input required name="full_name" type="text" ngModel [value]="memberProfile?.full_name"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">NRIC Number</ion-label>
+          <ion-input required name="nric_number" type="text" ngModel [value]="memberProfile?.nric_number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Gender</ion-label>
+          <ion-select name="gender" ngModel [value]="memberProfile?.gender">
+            <ion-select-option value="Male">Male</ion-select-option>
+            <ion-select-option value="Female">Female</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Phone</ion-label>
+          <ion-input required name="cell_number" type="text" ngModel [value]="memberProfile?.nric_number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input required name="email" type="text" ngModel [value]="memberProfile?.email"></ion-input>
+        </ion-item>
+      </ion-list>
+      <ion-col size="12" class="ion-padding">
+        <ion-button type="submit" class="ion-float-end" color="primary">Update</ion-button>
+      </ion-col>
+    </ion-grid>
+  </form>
+</ion-content>

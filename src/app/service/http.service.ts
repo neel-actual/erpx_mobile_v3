@@ -29,14 +29,16 @@ export class HttpService {
     }
   }
 
-  post(url, data = null, header = null) {
+  post(url, data = null, params = null, header = null) {
     if (this.config.isDesktop()) {
+      params = params || {};
+      params.withCredentials = true;
+      params.observe = 'response';
       return new Promise((resolve, reject) => {
         this.httpClient.post(url, data, {
-          observe: 'response',
-          withCredentials: true
+          params: params
         }).subscribe(res => {
-          resolve(res.body);
+          resolve(res);
         }, (err) => {
           reject(err);
         });
