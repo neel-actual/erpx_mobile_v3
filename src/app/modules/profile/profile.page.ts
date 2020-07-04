@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MemberService} from "../../service/member.service";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-profile',
@@ -10,7 +11,8 @@ export class ProfilePage implements OnInit {
   memberProfile: any = null;
 
   constructor(
-      private member: MemberService
+      private member: MemberService,
+      private auth: AuthService
   ) { }
 
   ngOnInit() {
@@ -19,4 +21,7 @@ export class ProfilePage implements OnInit {
     });
   }
 
+  logout() {
+    this.auth.logout();
+  }
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Platform, LoadingController } from '@ionic/angular';
+import { Platform, LoadingController, IonNav } from '@ionic/angular';
 import {StatusBar} from "@ionic-native/status-bar/ngx";
 import {SplashScreen} from "@ionic-native/splash-screen/ngx";
 
@@ -40,15 +40,25 @@ export class AppComponent {
 
     this.events.subscribe('loading:start', (content = '') => this.presentLoading(content));
     this.events.subscribe('loading:end', () => this.dismissLoading());
+    this.events.subscribe('login', () => this.loginUser());
+    this.events.subscribe('logout', () => this.logoutUser());
 
     this.presentLoading();
     this.auth.isLoggedIn().then(() => {
       // this.router.navigate([''])
     }).catch(() => {
-      this.router.navigate(['/login']);
+      this.router.navigate(['login'])
     }).finally(() => {
       this.dismissLoading()
     })
+  }
+
+  loginUser() {
+    this.router.navigate([''])
+  }
+
+  logoutUser() {
+    this.router.navigate(['login'])
   }
 
   async presentLoading(message = '') {
@@ -65,7 +75,7 @@ export class AppComponent {
     else {
       setTimeout(() => {
         this.loader.dismiss();
-      }, 500);
+      }, 1000);
     }
   }
 }

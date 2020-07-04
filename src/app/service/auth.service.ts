@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ConfigService} from './config.service';
 import {HttpService} from './http.service';
+import {EventBus} from "../event-bus.service";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ export class AuthService {
 
   constructor(
     private config: ConfigService,
-    private http: HttpService
+    private http: HttpService,
+    private events: EventBus
   ) { }
 
   isLoggedIn() {
@@ -74,6 +76,11 @@ export class AuthService {
     //       reject(err)
     //     });
     // });
+  }
+
+  logout() {
+    localStorage.clear();
+    this.events.publish('logout', '');
   }
 
 
