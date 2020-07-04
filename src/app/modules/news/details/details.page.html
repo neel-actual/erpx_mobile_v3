@@ -8,8 +8,8 @@
 </ion-header>
 
 <ion-content>
-  <img [src]="item?.news_image"/>
-  <h1>{{item?.title}}</h1>
+  <h3 class="ion-padding"><b>{{ item?.title }}</b></h3>
   <p>{{item?.publish_date | date: 'MMM d, y'}}</p>
+  <img [src]="item?.news_image"/>
   <div class="ion-padding" [innerHtml]="item?.content"></div>
 </ion-content>

@@ -10,7 +10,11 @@
     <ion-card *ngFor="let item of list" [routerLink]="item.name">
       <img [src]="item.training_image"/>
       <ion-card-header>
-        <ion-card-subtitle class="ion-text-center">{{ item.title }}</ion-card-subtitle>
+        <ion-card-subtitle class="ion-text-center">
+          {{ item.training_name }}<br>
+          {{ item.start_date_time | date: 'MMM d, y, h:mm a' }} - {{ item.start_date_time.getDate() == item.end_date_time.getDate() ? (item.end_date_time | date: 'h:mm a' ) : (item.end_date_time | date: 'MMM d, y, h:mm a') }}<br>
+          {{ item.venue }}
+        </ion-card-subtitle>
       </ion-card-header>
     </ion-card>
   </ion-list>

@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Event Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h3 class="ion-padding"><b>{{ item?.event_name }}</b></h3>
+  <img [src]="item?.event_image"/>
+  <div class="ion-padding" [innerHtml]="item?.description"></div>
+</ion-content>
