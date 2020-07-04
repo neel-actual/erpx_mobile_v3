@@ -18,14 +18,14 @@ export class HttpService {
 
   get(url, params = null, header = null) {
     if (this.config.isDesktop()) {
+      params = params || {};
+      params.withCredentials = true;
+      params.observe = 'response';
       return new Promise((resolve, reject) => {
-        this.httpClient.get(url, header || {
-          observe: 'response',
-          withCredentials: true
-        }).subscribe((res: any) => { resolve(res.body); }, (err) => { reject(err) });
+        this.httpClient.get(url, params).subscribe((res: any) => { resolve(res.body); }, (err) => { reject(err) });
       });
     } else {
-      return this.http.get(url, params || {}, params || {}).then(res => res.data ? JSON.parse(res.data) : {});
+      return this.http.get(url, params || {}, header || {}).then(res => res.data ? JSON.parse(res.data) : {});
     }
   }
 

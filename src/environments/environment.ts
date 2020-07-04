@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  SERVER_URL: 'https://www.prulia.org.my',
+  ONESIGNAL_APP_ID: 'd76fe5ec-8782-455a-8261-6a73653d7bb3'
 };
 
 /*

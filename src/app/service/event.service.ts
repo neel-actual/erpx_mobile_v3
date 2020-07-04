@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ConfigService} from "./config.service";
 import {HttpService} from "./http.service";
+import {MemberService} from "./member.service";
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +11,17 @@ export class EventService {
 
   constructor(
       private config: ConfigService,
-      private http: HttpService
+      private http: HttpService,
+      private member: MemberService
   ) { }
 
-  getListing(refresh = false) {
+  async getListing(refresh = false) {
     if (this.listing.length === 0 || refresh) {
-      return this.http.get(this.config.get_api_url('/api/method/erpx_prulia.prulia_events.doctype.prulia_event.prulia_event.get_event_list')).then(res => {
+      let member_profile = await this.member.getProfile();
+
+      return this.http.get(this.config.get_api_url('/api/method/erpx_prulia.prulia_events.doctype.prulia_event.prulia_event.get_event_list'), {
+        params: { member_name: member_profile.name }
+      }).then(res => {
 
         if (res['message'] instanceof Array) {
           this.listing = res['message'];

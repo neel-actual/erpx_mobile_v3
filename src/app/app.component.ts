@@ -8,6 +8,8 @@ import {ConfigService} from './service/config.service';
 import {AuthService} from './service/auth.service';
 import {Router, ActivatedRoute} from '@angular/router';
 
+import {EventBus} from "./event-bus.service";
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -22,7 +24,8 @@ export class AppComponent {
     private auth: AuthService,
     private router: Router,
     private route: ActivatedRoute,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private event: EventBus
   ) {
     this.initializeApp();
   }
