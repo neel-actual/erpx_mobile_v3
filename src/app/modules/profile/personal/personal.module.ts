@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { PersonalPageRoutingModule } from './personal-routing.module';
 
 import { PersonalPage } from './personal.page';
+import {NgxMaskIonicModule} from "ngx-mask-ionic";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PersonalPageRoutingModule
+    PersonalPageRoutingModule,
+    NgxMaskIonicModule
   ],
   declarations: [PersonalPage]
 })

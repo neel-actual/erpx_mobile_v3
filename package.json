@@ -31,6 +31,7 @@
     "cordova-plugin-advanced-http": "^2.5.1",
     "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-inappbrowser": "^4.0.0",
+    "ngx-mask-ionic": "^1.1.2",
     "rxjs": "~6.5.1",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

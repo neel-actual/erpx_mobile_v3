@@ -17,7 +17,7 @@
         </ion-item>
         <ion-item>
           <ion-label position="floating">NRIC Number</ion-label>
-          <ion-input required name="nric_number" type="text" ngModel [value]="memberProfile?.nric_number"></ion-input>
+          <ion-input required name="nric_number" type="text" mask="000000-00-0000" ngModel [value]="memberProfile?.nric_number"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Gender</ion-label>
@@ -28,7 +28,7 @@
         </ion-item>
         <ion-item>
           <ion-label position="floating">Phone</ion-label>
-          <ion-input required name="cell_number" type="text" ngModel [value]="memberProfile?.nric_number"></ion-input>
+          <ion-input required name="cell_number" type="text" ngModel prefix="6" mask="000-000 00000" [value]="memberProfile?.cell_number"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="floating">Email</ion-label>
