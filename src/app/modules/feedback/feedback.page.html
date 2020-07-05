@@ -3,10 +3,30 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title class="ion-text-center">Feedback</ion-title>
+    <ion-title>Feedback</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <form #form="ngForm" (ngSubmit)="update(form)">
+    <ion-grid>
+      <ion-col>
+        <ion-list>
+          <ion-item>
+            <ion-label>Category</ion-label>
+            <ion-select name="category">
+              <ion-select-option *ngFor="let category of categories" [value]="category.name">{{ category.category }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Question / Comment</ion-label>
+            <ion-input required name="remark" type="text"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <ion-col size="12" class="ion-padding">
+        <ion-button type="submit" class="ion-float-end" color="primary">Submit</ion-button>
+      </ion-col>
+    </ion-grid>
+  </form>
 </ion-content>
