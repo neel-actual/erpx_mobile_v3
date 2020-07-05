@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center">More</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card [routerLink]="'news'" class="card-icon-avatar">
+          <ion-icon name="newspaper-outline" color="primary" class="ion-padding"></ion-icon>
+          <ion-card-header>
+            <ion-card-subtitle class="ion-text-center">News</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card [routerLink]="'partner'" class="card-icon-avatar">
+          <ion-icon name="people-outline" color="primary" class="ion-padding"></ion-icon>
+          <ion-card-header>
+            <ion-card-subtitle class="ion-text-center">Partner</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card [routerLink]="'book'" class="card-icon-avatar">
+          <ion-icon name="book-outline" color="primary" class="ion-padding"></ion-icon>
+          <ion-card-header>
+            <ion-card-subtitle class="ion-text-center">Book</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card [routerLink]="'feedback'" class="card-icon-avatar">
+          <ion-icon name="chatbubbles-outline" color="primary" class="ion-padding"></ion-icon>
+          <ion-card-header>
+            <ion-card-subtitle class="ion-text-center">Feedback</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
