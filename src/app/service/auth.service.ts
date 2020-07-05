@@ -24,7 +24,7 @@ export class AuthService {
   login (usr, pwd) {
     let credentials = {usr: usr, pwd: pwd, device: "mobile"};
 
-    return this.http.post(this.config.get_api_url('/api/method/login'), credentials, {}).then(data => {
+    return this.http.post(this.config.get_api_url('/api/method/login'), credentials).then(data => {
       localStorage.user = usr;
       let cookie = this.config.getCookies(document.cookie);
       localStorage.session_id = cookie['sid'];

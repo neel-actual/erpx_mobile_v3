@@ -25,7 +25,8 @@ export class HttpService {
         this.httpClient.get(url, params).subscribe((res: any) => { resolve(res.body); }, (err) => { reject(err) });
       });
     } else {
-      return this.http.get(url, params || {}, header || {}).then(res => res.data ? JSON.parse(res.data) : {});
+      params = params || {};
+      return this.http.get(url, params.params || {}, header || {}).then(res => res.data ? JSON.parse(res.data) : {});
     }
   }
 
@@ -45,7 +46,11 @@ export class HttpService {
       });
     }
     else {
-      return this.http.post(url, data || {}, header || {}).then(res => res.data ? JSON.parse(res.data) : {});
+      return this.http.post(url, data || {}, header || {})
+          .then(res => res.data ? JSON.parse(res.data) : {})
+          .catch(e => {
+            console.error(e);
+          })
     }
   }
 }
