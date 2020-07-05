@@ -83,6 +83,15 @@ export class AuthService {
     this.events.publish('logout', '');
   }
 
+  updatePassword(old_password, new_password) {
+    let data = {
+      old_password: old_password,
+      new_password: new_password,
+      logout_all_sessions: false
+    };
+
+    return this.http.post(this.config.get_api_url('/api/method/frappe.core.doctype.user.user.update_password'), data)
+  }
 
   set_sid_cookie() {
     console.log("Session ID found", localStorage.session_id);

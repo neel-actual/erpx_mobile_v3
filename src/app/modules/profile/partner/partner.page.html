@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Smart Partners</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-padding">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Personal Accident Expired Date</ion-label>
+        <ion-input disabled name="pa_status" type="text" ngModel [value]="memberProfile?.pa_status"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Professional Indemnity Expired Date</ion-label>
+        <ion-input disabled name="pi_status" type="text" ngModel [value]="memberProfile?.pi_status"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Maxis</ion-label>
+        <ion-input disabled name="maxis_status" type="text" ngModel [value]="memberProfile?.maxis_status"></ion-input>
+      </ion-item>
+    </ion-list>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Prudential Information</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-padding">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Prudential ID</ion-label>
+        <ion-input disabled name="prudential_id" type="text" ngModel [value]="memberProfile?.prudential_id"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Branch</ion-label>
+        <ion-input disabled name="branch" type="text" ngModel [value]="memberProfile?.branch"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Region</ion-label>
+        <ion-input disabled name="region" type="text" ngModel [value]="memberProfile?.region"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Position</ion-label>
+        <ion-input disabled name="position" type="text" ngModel [value]="memberProfile?.position"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Agency Code</ion-label>
+        <ion-input disabled name="agency_no" type="text" ngModel [value]="memberProfile?.agency_no"></ion-input>
+      </ion-item>
+    </ion-list>
+  </ion-grid>
+</ion-content>

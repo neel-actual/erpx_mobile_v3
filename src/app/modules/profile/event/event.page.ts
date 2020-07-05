@@ -3,12 +3,11 @@ import {MemberService} from "../../../service/member.service";
 import {EventBus} from "../../../event-bus.service";
 
 @Component({
-  selector: 'app-personal',
-  templateUrl: './personal.page.html',
-  styleUrls: ['./personal.page.scss'],
+  selector: 'app-event',
+  templateUrl: './event.page.html',
+  styleUrls: ['./event.page.scss'],
 })
-
-export class PersonalPage implements OnInit {
+export class EventPage implements OnInit {
   memberProfile: any;
 
   constructor(
