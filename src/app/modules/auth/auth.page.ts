@@ -4,21 +4,33 @@ import {Router} from '@angular/router';
 import {AlertController} from "@ionic/angular";
 import {EventBus} from "../../event-bus.service";
 
+declare let window: any;
+
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.page.html',
   styleUrls: ['./auth.page.scss'],
 })
 export class AuthPage implements OnInit {
+  app_version: string = '3.0.6';
 
   constructor(
       private auth: AuthService,
       private router: Router,
       private alert: AlertController,
-      private events: EventBus
-  ) { }
+      private events: EventBus,
+  ) {
+
+  }
 
   ngOnInit() {}
+
+  async getAppVersion() {
+    window.cordova && window.cordova.getAppVersion.getVersionNumber(version => {
+      console.log(version);
+      this.app_version = version;
+    });
+  }
 
   login(form) {
     let { username, password } = form.value;

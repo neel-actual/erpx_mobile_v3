@@ -14,30 +14,35 @@ export class HttpService {
     private httpClient: HttpClient, 
     private platform: Platform,
     private config: ConfigService
-    ) { }
+    ) {
+
+    this.http.setDataSerializer("json");
+  }
 
   get(url, params = null, header = null) {
-    if (this.config.isDesktop()) {
-      params = params || {};
-      params.withCredentials = true;
-      params.observe = 'response';
+    if (true) {
+
       return new Promise((resolve, reject) => {
-        this.httpClient.get(url, params).subscribe((res: any) => { resolve(res.body); }, (err) => { reject(err) });
+        this.httpClient.get(url, {
+          params: params || {},
+          withCredentials: true,
+          observe: 'response'
+        }).subscribe((res: any) => { resolve(res.body); }, (err) => { reject(err) });
       });
     } else {
+      this.http.setDataSerializer("json");
       params = params || {};
-      return this.http.get(url, params.params || {}, header || {}).then(res => res.data ? JSON.parse(res.data) : {});
+      return this.http.get(url, params || {}, header || {}).then(res => res.data ? JSON.parse(res.data) : {});
     }
   }
 
   post(url, data = null, params = null, header = null) {
-    if (this.config.isDesktop()) {
-      params = params || {};
-      params.withCredentials = true;
-      params.observe = 'response';
+    if (true) {
       return new Promise((resolve, reject) => {
         this.httpClient.post(url, data, {
-          params: params
+          params: params || {},
+          withCredentials: true,
+          observe: 'body'
         }).subscribe(res => {
           resolve(res);
         }, (err) => {
@@ -46,6 +51,7 @@ export class HttpService {
       });
     }
     else {
+      this.http.setDataSerializer("json");
       return this.http.post(url, data || {}, header || {})
           .then(res => res.data ? JSON.parse(res.data) : {})
           .catch(e => {

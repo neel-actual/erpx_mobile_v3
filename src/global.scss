@@ -24,3 +24,11 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.abstract-bg {
+  --background: url("/assets/images/abstract-bg.jpeg") 0 0/150% 100% no-repeat;
+}
+
+.text-bold {
+  font-weight: bold;
+}

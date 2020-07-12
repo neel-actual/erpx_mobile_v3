@@ -11,4 +11,54 @@
   <h3 class="ion-padding"><b>{{ item?.event_name }}</b></h3>
   <img [src]="item?.event_image"/>
   <div class="ion-padding" [innerHtml]="item?.description"></div>
+  <ion-list>
+    <ion-item>
+      <ion-icon name="time"></ion-icon>
+      <div class="ion-padding">
+        {{ item?.start_date_time | date: 'MMM d, y, h:mm a'}} -
+        {{ item?.start_date_time.getDate() == item?.end_date_time.getDate() ? (item?.end_date_time | date: 'h:mm a') : (item?.end_date_time | date: 'MMM d, y, h:mm a') }}
+      </div>
+    </ion-item>
+    <ion-item class="ion-padding-bottom">
+      <ion-icon name="pin"></ion-icon>
+      <div class="ion-padding">
+        {{ item?.venue }}
+      </div>
+    </ion-item>
+<!--    <ion-button-->
+<!--            (click)="register()"-->
+<!--            [hidden]="item?.register || item?.event_status!== 'Open For Registration'"-->
+<!--            expand="block" class="ion-padding-end ion-padding-start">-->
+<!--      Register-->
+<!--    </ion-button>-->
+    <ion-button
+            (click)="register()"
+            expand="block" class="ion-padding-end ion-padding-start">
+      Register
+    </ion-button>
+    <ion-item [hidden]="!item?.register">
+      <ion-icon name="restaurant"></ion-icon>
+      <div class="ion-padding">
+        {{ item?.meal_option }}
+      </div>
+    </ion-item>
+    <ion-item [hidden]="!item?.register || item?.display_shirt_option == '0'">
+      <ion-icon name="shirt"></ion-icon>
+      <div class="ion-padding">
+        {{ item?.shirt_size }}
+      </div>
+    </ion-item>
+    <ion-item [hidden]="!item?.register || item?.display_accomodation_option == '0'">
+      <ion-icon name="home"></ion-icon>
+      <div class="ion-padding">
+        {{ item?.accomodation }}
+      </div>
+    </ion-item>
+    <ion-item [hidden]="!item?.register || item?.break_up_session == '0'">
+      <ion-icon name="language"></ion-icon>
+      <div class="ion-padding">
+        {{ item?.pref_lang }}
+      </div>
+    </ion-item>
+  </ion-list>
 </ion-content>

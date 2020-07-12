@@ -20,9 +20,8 @@ export class EventService {
       let member_profile = await this.member.getProfile();
 
       return this.http.get(this.config.get_api_url('/api/method/erpx_prulia.prulia_events.doctype.prulia_event.prulia_event.get_event_list'), {
-        params: { member_name: member_profile.name }
+        member_name: member_profile.name
       }).then(res => {
-        console.log(res);
         if (res['message'] instanceof Array) {
           this.listing = res['message'];
         }

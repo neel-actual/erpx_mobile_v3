@@ -57,11 +57,15 @@ export class AppComponent {
   }
 
   loginUser() {
-    this.router.navigate([''])
+    this.router.navigate([''], {
+      replaceUrl: true
+    });
   }
 
   logoutUser() {
-    this.router.navigate(['login'])
+    this.router.navigate(['login'], {
+      replaceUrl: true
+    })
   }
 
   async presentToast(opts: {
@@ -69,7 +73,6 @@ export class AppComponent {
     duration: number,
     color: string
   }) {
-    console.log(opts);
     if (opts.message) {
       opts.color = opts.color || 'success';
       opts.duration = opts.duration || 2000;

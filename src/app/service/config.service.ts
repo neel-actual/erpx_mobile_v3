@@ -41,8 +41,8 @@ export class ConfigService {
     return cookies;
   }
 
-  get_api_url(URL) {
-    return this.get_service_endpoint() + URL;
+  get_api_url(url = '') {
+    return this.get_service_endpoint() + url;
   }
 
   get_service_endpoint(server = null) {

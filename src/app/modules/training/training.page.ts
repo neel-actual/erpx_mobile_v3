@@ -17,4 +17,11 @@ export class TrainingPage implements OnInit {
     this.training.getListing().then(data => this.list = data);
   }
 
+  doRefresh($event) {
+    this.training.getListing(true)
+        .then(data => this.list = data)
+        .finally(() => {
+          $event.target.complete();
+        });
+  }
 }

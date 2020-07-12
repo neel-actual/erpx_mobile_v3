@@ -17,4 +17,11 @@ export class EventPage implements OnInit {
     this.event.getListing().then(data => this.list = data);
   }
 
+  doRefresh($event) {
+    this.event.getListing(true)
+        .then(data => this.list = data)
+        .finally(() => {
+          $event.target.complete();
+        });
+  }
 }

@@ -25,9 +25,10 @@ export class AuthService {
     let credentials = {usr: usr, pwd: pwd, device: "mobile"};
 
     return this.http.post(this.config.get_api_url('/api/method/login'), credentials).then(data => {
-      localStorage.user = usr;
+      console.log(data);
+      localStorage.setItem('user', usr);
       let cookie = this.config.getCookies(document.cookie);
-      localStorage.session_id = cookie['sid'];
+      localStorage.setItem('session_id', cookie['sid']);
 
       return data;
     });
@@ -79,6 +80,7 @@ export class AuthService {
   }
 
   logout() {
+    document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
     localStorage.clear();
     this.events.publish('logout', '');
   }
@@ -94,8 +96,8 @@ export class AuthService {
   }
 
   set_sid_cookie() {
-    console.log("Session ID found", localStorage.session_id);
-    document.cookie = "sid=" + localStorage.session_id +
-      "; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+    console.log("Session ID found", localStorage.getItem('session_id'));
+    document.cookie = "sid=" + localStorage.getItem('session_id') +
+        "; expires=Fri, 31 Dec 9999 23:59:59 GMT";
   }
 }

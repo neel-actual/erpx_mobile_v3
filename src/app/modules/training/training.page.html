@@ -5,15 +5,22 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-list>
-    <ion-list-header [hidden]="list.length > 0">No Training Content Setup</ion-list-header>
+    <ion-list-header [hidden]="list.length > 0">No Training Found</ion-list-header>
     <ion-card *ngFor="let item of list" [routerLink]="item.name">
       <img [src]="item.training_image"/>
       <ion-card-header>
         <ion-card-subtitle class="ion-text-center">
-          {{ item.training_name }}<br>
-          {{ item.start_date_time | date: 'MMM d, y, h:mm a' }} - {{ item.start_date_time.getDate() == item.end_date_time.getDate() ? (item.end_date_time | date: 'h:mm a' ) : (item.end_date_time | date: 'MMM d, y, h:mm a') }}<br>
-          {{ item.venue }}
+          <p class="text-bold ion-no-margin">{{ item.event_name }}<p>
+          <p class="ion-no-margin">
+            {{ item.start_date_time | date: 'MMM d, y, h:mm a' }} - {{ item.start_date_time.getDate() == item.end_date_time.getDate() ? (item.end_date_time | date: 'h:mm a' ) : (item.end_date_time | date: 'MMM d, y, h:mm a') }}
+          </p>
+          <p class="ion-no-margin">
+            {{ item.venue }}
+          </p>
         </ion-card-subtitle>
       </ion-card-header>
     </ion-card>

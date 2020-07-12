@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-button  (click)="dismiss()">Close</ion-button>
+    </ion-buttons>
+    <ion-title>Event Preferences</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #form="ngForm" (ngSubmit)="update(form)">
+    <ion-grid class="ion-padding">
+      <ion-list>
+        <ion-item>
+          <ion-label>Meal Option</ion-label>
+          <ion-select name="meal_option" ngModel [value]="memberProfile?.meal_option">
+            <ion-select-option value="Non-Vegetarian">Non-Vegetarian</ion-select-option>
+            <ion-select-option value="Vegetarian">Vegetarian</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>Shirt Size Preference</ion-label>
+          <ion-select name="shirt_size" ngModel [value]="memberProfile?.shirt_size">
+            <ion-select-option value="XS">Extra Small (XS)</ion-select-option>
+            <ion-select-option value="S">Small (S)</ion-select-option>
+            <ion-select-option value="M">Medium (M)</ion-select-option>
+            <ion-select-option value="L">Large (L)</ion-select-option>
+            <ion-select-option value="XL">Extra Large (XL)</ion-select-option>
+            <ion-select-option value="XXL">Double Extra Large (XXL)</ion-select-option>
+            <ion-select-option value="XXXL">Triple Extra Large (XXXL)</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+      <ion-col size="12" class="ion-padding">
+        <ion-button type="submit" class="ion-float-end" color="primary">Update</ion-button>
+      </ion-col>
+    </ion-grid>
+  </form>
+</ion-content>

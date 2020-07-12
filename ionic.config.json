@@ -5,11 +5,5 @@
     "cordova": {}
   },
   "type": "angular",
-  "id": "c3c1dcfa",
-  "proxies": [
-    {
-      "path": "/api/",
-      "proxyUrl": "https://www.prulia.org.my"
-    }
-  ]
+  "id": "c3c1dcfa"
 }

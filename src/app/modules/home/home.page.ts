@@ -16,4 +16,10 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.home.getListing().then(data => this.list = data);
   }
+
+  ionViewWillEnter() {
+    if(!this.list.length) {
+      this.home.getListing().then(data => this.list = data);
+    }
+  }
 }
