@@ -57,4 +57,7 @@ export class TrainingService {
     });
   }
 
+  create_training_registration(data) {
+    return this.http.post(this.config.get_api_url('/api/method/erpx_prulia.prulia_trainings.doctype.prulia_training.prulia_training.add_attendance'), data)
+  }
 }

@@ -14,7 +14,7 @@
       <img [src]="item.training_image"/>
       <ion-card-header>
         <ion-card-subtitle class="ion-text-center">
-          <p class="text-bold ion-no-margin">{{ item.event_name }}<p>
+          <p class="text-bold ion-no-margin">{{ item.training_name }}<p>
           <p class="ion-no-margin">
             {{ item.start_date_time | date: 'MMM d, y, h:mm a' }} - {{ item.start_date_time.getDate() == item.end_date_time.getDate() ? (item.end_date_time | date: 'h:mm a' ) : (item.end_date_time | date: 'MMM d, y, h:mm a') }}
           </p>

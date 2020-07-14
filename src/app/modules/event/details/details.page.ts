@@ -39,7 +39,7 @@ export class DetailsPage implements OnInit {
     });
 
     this.events.subscribe('event:update', () => {
-      this.event.getListing().then(async data => {
+      this.event.getListing(true).then(async data => {
         (data || []).forEach(item => {
           if (this.item.name === item.name) {
             this.item = item;

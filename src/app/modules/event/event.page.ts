@@ -18,7 +18,7 @@ export class EventPage implements OnInit {
   ngOnInit() {
     this.event.getListing().then(data => this.list = data);
     this.events.subscribe('event:update', () => {
-      this.event.getListing().then(data => this.list = data);
+      this.event.getListing(true).then(data => this.list = data);
     });
   }
 

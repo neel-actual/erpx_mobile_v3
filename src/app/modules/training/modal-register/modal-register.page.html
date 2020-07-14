@@ -3,7 +3,7 @@
     <ion-buttons slot="end">
       <ion-button  (click)="dismiss()">Close</ion-button>
     </ion-buttons>
-    <ion-title>Event Preferences</ion-title>
+    <ion-title>Training Preferences</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -35,12 +35,6 @@
           <ion-select [(ngModel)]="event.accomodation" name="accomodation" required>
             <ion-select-option value="Yes">Yes</ion-select-option>
             <ion-select-option value="No">No</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <ion-item [hidden]="event.break_up_session != 1 || languages.length === 0">
-          <ion-label>Break Up Session Preferred language</ion-label>
-          <ion-select [(ngModel)]="event.pref_lang" name="pref_lang" required>
-            <ion-select-option *ngFor="let lang of languages" [value]="lang">{{ lang }}</ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item lines="none">

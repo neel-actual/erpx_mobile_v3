@@ -67,8 +67,5 @@ export class EventService {
 
   create_event_registration(data) {
     return this.http.post(this.config.get_api_url('/api/method/erpx_prulia.prulia_events.doctype.prulia_event.prulia_event.add_attendance'), data)
-        .then(res => {
-          console.log(res);
-        });
   }
 }

@@ -9,8 +9,8 @@
 
 <ion-content>
   <h3 class="ion-padding"><b>{{ item?.training_name }}</b></h3>
-  <img [src]="item?.training_image"/>
-  <div class="ion-padding" [innerHtml]="item?.description"></div>
+  <img class="ion-padding" [src]="item?.training_image"/>
+  <div class="ion-padding-start ion-padding-end" [innerHtml]="item?.description"></div>
   <ion-list>
     <ion-item>
       <ion-icon name="time"></ion-icon>
@@ -19,10 +19,37 @@
         {{ item?.start_date_time.getDate() == item?.end_date_time.getDate() ? (item?.end_date_time | date: 'h:mm a') : (item?.end_date_time | date: 'MMM d, y, h:mm a') }}
       </div>
     </ion-item>
-    <ion-item>
+    <ion-item class="ion-padding-bottom">
       <ion-icon name="pin"></ion-icon>
       <div class="ion-padding">
         {{ item?.venue }}
+      </div>
+    </ion-item>
+    <ion-button
+            (click)="register()"
+            [hidden]="item?.register || item?.training_status!== 'Open For Registration'"
+            expand="block" class="ion-padding-end ion-padding-start">
+      Register
+    </ion-button>
+  </ion-list>
+  <img class="ion-padding qr-img" [hidden]="!item?.register" [src]="'https://api.qrserver.com/v1/create-qr-code/?size=480x480&data=' + qr_content">
+  <ion-list>
+    <ion-item lines="none" [hidden]="!item?.register">
+      <ion-icon name="restaurant"></ion-icon>
+      <div class="ion-padding">
+        {{ item?.meal_option }}
+      </div>
+    </ion-item>
+    <ion-item lines="none" [hidden]="!item?.register || item?.display_shirt_option == '0'">
+      <ion-icon name="shirt"></ion-icon>
+      <div class="ion-padding">
+        {{ item?.shirt_size }}
+      </div>
+    </ion-item>
+    <ion-item lines="none" [hidden]="!item?.register || item?.display_accomodation_option == '0'">
+      <ion-icon name="home"></ion-icon>
+      <div class="ion-padding">
+        {{ item?.accomodation }}
       </div>
     </ion-item>
   </ion-list>
