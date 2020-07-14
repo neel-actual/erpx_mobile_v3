@@ -8,19 +8,19 @@
 </ion-header>
 
 <ion-content>
-  <form #form="ngForm" (ngSubmit)="update(form)">
+  <form #form="ngForm" (ngSubmit)="submitFeedback()">
     <ion-grid>
       <ion-col>
         <ion-list>
           <ion-item>
             <ion-label>Category</ion-label>
-            <ion-select name="category">
+            <ion-select [(ngModel)]="category" name="category">
               <ion-select-option *ngFor="let category of categories" [value]="category.name">{{ category.category }}</ion-select-option>
             </ion-select>
           </ion-item>
           <ion-item>
             <ion-label position="floating">Question / Comment</ion-label>
-            <ion-input required name="remark" type="text"></ion-input>
+            <ion-input required name="remark" [(ngModel)]="remark" type="text"></ion-input>
           </ion-item>
         </ion-list>
       </ion-col>
