@@ -3,6 +3,8 @@ import { AuthService } from '../../service/auth.service';
 import {Router} from '@angular/router';
 import {AlertController} from "@ionic/angular";
 import {EventBus} from "../../event-bus.service";
+import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
+import {ConfigService} from "../../service/config.service";
 
 declare let window: any;
 
@@ -19,6 +21,8 @@ export class AuthPage implements OnInit {
       private router: Router,
       private alert: AlertController,
       private events: EventBus,
+      private iab: InAppBrowser,
+      private config: ConfigService
   ) {
 
   }
@@ -55,6 +59,22 @@ export class AuthPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  register() {
+    const browser = this.iab.create(this.config.get_api_url('/member-registration'), '_blank',
+        'location=no');
+
+    browser.on("loadstop")
+        .subscribe(
+            (evt) => {
+              if (evt.url.match("registration-complete")) {
+                browser.close();
+              }
+            },
+            err => {
+              console.log("InAppBrowser loadstop Event Error: " + err);
+            });
   }
 
 }

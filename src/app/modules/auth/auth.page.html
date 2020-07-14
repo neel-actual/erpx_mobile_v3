@@ -28,7 +28,7 @@
           </div>
           <div>
             <ion-button color="secondary" class="ion-float-start" [routerLink]="['/forgot-password']" fill="clear">Forgot Password</ion-button>
-            <ion-button color="secondary" class="ion-float-end" fill="clear">Register</ion-button>
+            <ion-button color="secondary" class="ion-float-end" (click)="register()" fill="clear">Register</ion-button>
           </div>
           <div class="ion-padding">
             <ion-button disabled fill="clear" color="tertiary" expand="block">{{ app_version }}</ion-button>
