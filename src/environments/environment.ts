@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  SERVER_URL: 'https://www.prulia.org.my',
+  SERVER_URL: 'http://167.99.77.197',
   ONESIGNAL_APP_ID: 'd76fe5ec-8782-455a-8261-6a73653d7bb3'
 };
 

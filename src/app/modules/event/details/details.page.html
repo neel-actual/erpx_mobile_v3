@@ -8,9 +8,9 @@
 </ion-header>
 
 <ion-content>
-  <h3 class="ion-padding"><b>{{ item?.event_name }}</b></h3>
-  <img [src]="item?.event_image"/>
-  <div class="ion-padding" [innerHtml]="item?.description"></div>
+  <h4 class="ion-padding"><b>{{ item?.event_name }}</b></h4>
+  <img class="ion-padding" [src]="item?.event_image"/>
+  <div class="ion-padding-start ion-padding-end" [innerHtml]="item?.description"></div>
   <ion-list>
     <ion-item>
       <ion-icon name="time"></ion-icon>
@@ -25,36 +25,34 @@
         {{ item?.venue }}
       </div>
     </ion-item>
-<!--    <ion-button-->
-<!--            (click)="register()"-->
-<!--            [hidden]="item?.register || item?.event_status!== 'Open For Registration'"-->
-<!--            expand="block" class="ion-padding-end ion-padding-start">-->
-<!--      Register-->
-<!--    </ion-button>-->
     <ion-button
             (click)="register()"
+            [hidden]="item?.register || item?.event_status!== 'Open For Registration'"
             expand="block" class="ion-padding-end ion-padding-start">
       Register
     </ion-button>
-    <ion-item [hidden]="!item?.register">
+  </ion-list>
+  <img class="ion-padding qr-img" [hidden]="!item?.register" [src]="'https://api.qrserver.com/v1/create-qr-code/?size=480x480&data=' + qr_content">
+  <ion-list>
+    <ion-item lines="none" [hidden]="!item?.register">
       <ion-icon name="restaurant"></ion-icon>
       <div class="ion-padding">
         {{ item?.meal_option }}
       </div>
     </ion-item>
-    <ion-item [hidden]="!item?.register || item?.display_shirt_option == '0'">
+    <ion-item lines="none" [hidden]="!item?.register || item?.display_shirt_option == '0'">
       <ion-icon name="shirt"></ion-icon>
       <div class="ion-padding">
         {{ item?.shirt_size }}
       </div>
     </ion-item>
-    <ion-item [hidden]="!item?.register || item?.display_accomodation_option == '0'">
+    <ion-item lines="none" [hidden]="!item?.register || item?.display_accomodation_option == '0'">
       <ion-icon name="home"></ion-icon>
       <div class="ion-padding">
         {{ item?.accomodation }}
       </div>
     </ion-item>
-    <ion-item [hidden]="!item?.register || item?.break_up_session == '0'">
+    <ion-item lines="none" [hidden]="!item?.register || item?.break_up_session == '0'">
       <ion-icon name="language"></ion-icon>
       <div class="ion-padding">
         {{ item?.pref_lang }}

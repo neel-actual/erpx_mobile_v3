@@ -8,19 +8,19 @@
 </ion-header>
 
 <ion-content>
-  <form #form="ngForm" (ngSubmit)="update(form)">
+  <form #form="ngForm" (ngSubmit)="save(form)">
     <ion-grid class="ion-padding">
       <ion-list>
         <ion-item>
           <ion-label>Meal Option</ion-label>
-          <ion-select name="meal_option" ngModel [value]="memberProfile?.meal_option">
+          <ion-select name="meal_option" [(ngModel)]="event.meal_option">
             <ion-select-option value="Non-Vegetarian">Non-Vegetarian</ion-select-option>
             <ion-select-option value="Vegetarian">Vegetarian</ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-item>
+        <ion-item [hidden]="event?.display_shirt_option == '0'">
           <ion-label>Shirt Size Preference</ion-label>
-          <ion-select name="shirt_size" ngModel [value]="memberProfile?.shirt_size">
+          <ion-select name="shirt_size" ngModel [(ngModel)]="event.shirt_size">
             <ion-select-option value="XS">Extra Small (XS)</ion-select-option>
             <ion-select-option value="S">Small (S)</ion-select-option>
             <ion-select-option value="M">Medium (M)</ion-select-option>
@@ -30,9 +30,35 @@
             <ion-select-option value="XXXL">Triple Extra Large (XXXL)</ion-select-option>
           </ion-select>
         </ion-item>
+        <ion-item [hidden]="event.display_accomodation_option != 1">
+          <ion-label>Accomodation Needed</ion-label>
+          <ion-select [(ngModel)]="event.accomodation" name="accomodation" required>
+            <ion-select-option value="Yes">Yes</ion-select-option>
+            <ion-select-option value="No">No</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item [hidden]="event.break_up_session != 1 || languages.length === 0">
+          <ion-label>Break Up Session Preferred language</ion-label>
+          <ion-select [(ngModel)]="event.pref_lang" name="pref_lang" required>
+            <ion-select-option *ngFor="let lang of languages" [value]="lang">{{ lang }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-text>
+            <p>I declare that the information given herein are correct to the best of my knowledge and belief. </p>
+            <p>I agree to be govern by the rules and regulations of PRULIA as they now exist as they may hereafter be altered.</p>
+            <p>I hereby authorize Prudential Assurance Malaysia Berhad to debit by commission account for the registration of the event</p>
+          </ion-text>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-text>
+            <p>I agree the statement above</p>
+          </ion-text>
+          <ion-checkbox slot="start" [(ngModel)]="acknowledgement" name="acknowledgement"></ion-checkbox>
+        </ion-item>
       </ion-list>
       <ion-col size="12" class="ion-padding">
-        <ion-button type="submit" class="ion-float-end" color="primary">Update</ion-button>
+        <ion-button type="submit" class="ion-float-end" color="primary">Save</ion-button>
       </ion-col>
     </ion-grid>
   </form>

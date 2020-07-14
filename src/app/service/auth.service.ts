@@ -80,9 +80,10 @@ export class AuthService {
   }
 
   logout() {
-    document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
-    localStorage.clear();
-    this.events.publish('logout', '');
+    return this.http.get(this.config.get_api_url('/api/method/logout')).then(() => {
+      localStorage.clear();
+      this.events.publish('logout', '');
+    });
   }
 
   updatePassword(old_password, new_password) {

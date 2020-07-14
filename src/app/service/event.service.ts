@@ -55,4 +55,20 @@ export class EventService {
       return res;
     });
   }
+
+  getLang(position: string) {
+    return this.http.post(this.config.get_api_url('/api/method/erpx_prulia.prulia_events.doctype.prulia_event.prulia_event.get_lang'), {
+      position: position
+    }).then(res => {
+      console.log(res);
+      return res['message'] || [];
+    });
+  }
+
+  create_event_registration(data) {
+    return this.http.post(this.config.get_api_url('/api/method/erpx_prulia.prulia_events.doctype.prulia_event.prulia_event.add_attendance'), data)
+        .then(res => {
+          console.log(res);
+        });
+  }
 }

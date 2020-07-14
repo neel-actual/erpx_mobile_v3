@@ -33,7 +33,7 @@ export class EventBus {
    * @param topic The name of the topic to emit data to.
    * @param data data in any format to pass on.
    */
-  publish(topic: string, data: any): void {
+  publish(topic: string, data: any = ''): void {
     const subject = this.channels[topic];
     if (!subject) {
       // Or you can create a new subject for future subscribers

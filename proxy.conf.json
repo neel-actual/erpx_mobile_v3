@@ -1,6 +1,6 @@
 {
   "/api/": {
-    "target": "https://www.prulia.org.my",
+    "target": "http://167.99.77.197",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"

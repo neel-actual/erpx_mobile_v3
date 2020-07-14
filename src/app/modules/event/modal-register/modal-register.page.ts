@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ModalController, AlertController, ToastController} from "@ionic/angular";
 import {EventBus} from "../../../event-bus.service";
+import {EventService} from "../../../service/event.service";
 
 @Component({
   selector: 'app-modal-register',
@@ -8,17 +9,51 @@ import {EventBus} from "../../../event-bus.service";
   styleUrls: ['./modal-register.page.scss'],
 })
 export class ModalRegisterPage implements OnInit {
-  @Input() event: Object;
+  @Input() event: any;
+  languages: string[] = [];
+  acknowledgement: boolean = false;
 
   constructor(
       private modal: ModalController,
       private alert: AlertController,
       private toast: ToastController,
+      private eventService: EventService,
       private events: EventBus
   ) { }
 
   ngOnInit() {
     console.log(this.event);
+    this.eventService.getLang(this.event.position_restriction).then(data => {
+      data.forEach(lang => {
+         this.languages.push(lang.language);
+      });
+      this.event.pref_lang = this.languages[0];
+    })
+  }
+
+  save() {
+    this.events.publish('loading:start', 'Saving...');
+    if (this.acknowledgement) {
+      this.eventService.create_event_registration({
+        "member": this.event.member.name,
+        "member_name": this.event.member.full_name,
+        "event": this.event.name,
+        "meal": this.event.meal_option,
+        "shirt": this.event.shirt_size,
+        "accomodation": this.event.accomodation,
+        "pref_lang": this.event.pref_lang
+      }).then(() => {
+        this._createToast('Registration was updated successfully');
+
+        this.events.publish('loading:end');
+        this.events.publish('event:update');
+        this.dismiss();
+      }).catch((e) => {
+        this._displayError(e);
+      });
+    } else {
+      this._displayAckError();
+    }
   }
 
   dismiss() {
@@ -37,7 +72,6 @@ export class ModalRegisterPage implements OnInit {
   }
 
   async _displayError(error) {
-    console.log(error);
     let alert = await this.alert.create({
       header: 'Error',
       message: 'Error in update',

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {EventService} from "../../service/event.service";
+import {EventBus} from "../../event-bus.service";
 
 @Component({
   selector: 'app-event',
@@ -10,11 +11,15 @@ export class EventPage implements OnInit {
   list: any = [];
 
   constructor(
-      private event: EventService
+      private event: EventService,
+      private events: EventBus
   ) { }
 
   ngOnInit() {
     this.event.getListing().then(data => this.list = data);
+    this.events.subscribe('event:update', () => {
+      this.event.getListing().then(data => this.list = data);
+    });
   }
 
   doRefresh($event) {

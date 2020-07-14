@@ -4,6 +4,7 @@ import {EventService} from "../../../service/event.service";
 import {MemberService} from "../../../service/member.service";
 import {ModalController} from "@ionic/angular";
 import {ModalRegisterPage} from "../modal-register/modal-register.page";
+import {EventBus} from "../../../event-bus.service";
 
 @Component({
   selector: 'app-details',
@@ -12,19 +13,45 @@ import {ModalRegisterPage} from "../modal-register/modal-register.page";
 })
 export class DetailsPage implements OnInit {
   item: any = null;
+  qr_content: any = '';
 
   constructor(
       private route: ActivatedRoute,
       private event: EventService,
       private member: MemberService,
-      private modal: ModalController
+      private modal: ModalController,
+      private events: EventBus
   ) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.event.getItem(params.name).then(item => {
+      this.event.getItem(params.name).then(async item => {
+        console.log(item);
         this.item = item;
-      })
+        this.item.member = await this.member.getProfile();
+
+        this.qr_content = [
+          this.item.name,
+          this.item.member.name,
+          this.item.member.agency_no
+        ].join('/');
+      });
+    });
+
+    this.events.subscribe('event:update', () => {
+      this.event.getListing().then(async data => {
+        (data || []).forEach(item => {
+          if (this.item.name === item.name) {
+            this.item = item;
+          }
+        });
+        this.item.member = await this.member.getProfile();
+        this.qr_content = [
+          this.item.name,
+          this.item.member.name,
+          this.item.member.agency_no
+        ].join('/');
+      });
     });
   }
 
@@ -39,6 +66,7 @@ export class DetailsPage implements OnInit {
       if (temp.display_accomodation_option == 1) {
         temp.accomodation = "Yes";
       }
+      temp.member = member;
 
       this.openRegisterModal(temp)
     });

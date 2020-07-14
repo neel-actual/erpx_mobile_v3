@@ -32,3 +32,41 @@
 .text-bold {
   font-weight: bold;
 }
+
+.qr-img {
+    -webkit-animation: blink-animation 1s steps(5, start) infinite;
+    -moz-animation: blink-animation 1s steps(5, start) infinite;
+    -ms-animation: blink-animation 1s steps(5, start) infinite;
+    -o-animation: blink-animation 1s steps(5, start) infinite;
+    --animation: blink-animation 1s steps(5, start) infinite;
+}
+
+@-webkit-keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+
+@-moz-keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+
+@-ms-keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+
+@-o-keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
