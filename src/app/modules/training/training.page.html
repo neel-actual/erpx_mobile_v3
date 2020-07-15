@@ -11,6 +11,15 @@
   <ion-list>
     <ion-list-header [hidden]="list.length > 0">No Training Found</ion-list-header>
     <ion-card *ngFor="let item of list" [routerLink]="item.name">
+      <ion-chip [hidden]="!item.register" class="event-status yellow">
+        <ion-label color="dark">{{ item.attendance === 'Yes' ? 'Attended' : 'Registered' }}</ion-label>
+      </ion-chip>
+      <ion-chip [hidden]="!(!item.register && item.training_status== 'Open For Registration') && !(item.training_status == 'Publish' && item.show_open_for_registration == 1)" class="event-status green">
+        <ion-label color="dark">Ready for Registration</ion-label>
+      </ion-chip>
+      <ion-chip [hidden]="!(!item.register && item.training_status == 'Registration Closed')" class="event-status red">
+        <ion-label color="dark">Registration Closed</ion-label>
+      </ion-chip>
       <img [src]="item.training_image"/>
       <ion-card-header>
         <ion-card-subtitle class="ion-text-center">

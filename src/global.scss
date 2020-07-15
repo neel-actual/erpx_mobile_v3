@@ -59,6 +59,21 @@
   justify-content: center;
 }
 
+.event-status {
+  position: absolute;
+  right: 0;
+  opacity: 0.95;
+  &.red {
+    background-color: #F1646B;
+  }
+  &.yellow {
+    background-color: #ffca28;
+  }
+  &.green {
+    background-color: #66bb6a;
+  }
+}
+
 @-webkit-keyframes blink-animation {
   to {
     visibility: hidden;
