@@ -79,6 +79,7 @@ export class AppComponent {
     this.router.navigate([''], {
       replaceUrl: true
     });
+    this.events.publish('greetings:show');
   }
 
   logoutUser() {
@@ -126,6 +127,7 @@ export class AppComponent {
 
   getNews() {
     return this.member.getProfile().then(memberProfile => {
+      console.log(memberProfile);
       return this.news.getPopup().then(list => {
         let images = [];
 
@@ -134,7 +136,7 @@ export class AppComponent {
               ret = true;
 
           filters.forEach(filter => {
-            if (ret && news[filter].length && news[filter].map(el => { return el.name; }).indexOf(this.member[filter]) === -1) { ret = false; }
+            if (ret && news[filter].length && news[filter].map(el => { return el.name; }).indexOf(memberProfile[filter]) === -1) { ret = false; }
           });
 
           return ret;
