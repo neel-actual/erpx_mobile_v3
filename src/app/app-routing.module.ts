@@ -13,6 +13,10 @@ const routes: Routes = [
   {
     path: 'forgot-password',
     loadChildren: () => import('./modules/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
+  },
+  {
+    path: 'news-modal',
+    loadChildren: () => import('./news-modal/news-modal.module').then( m => m.NewsModalPageModule)
   }
 
 ];

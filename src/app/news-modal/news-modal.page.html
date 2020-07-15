@@ -1,0 +1,13 @@
+<ion-content>
+  <ion-fab vertical="top" horizontal="end" slot="fixed" (click)="dismiss()">
+    <ion-fab-button size="small" color="dark">
+      <ion-icon name="close"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-slides class="ion-padding-top" pager="true" [options]="slideOpts">
+    <ion-slide *ngFor="let img of list">
+      <img [src]="img"/>
+    </ion-slide>
+  </ion-slides>
+
+</ion-content>

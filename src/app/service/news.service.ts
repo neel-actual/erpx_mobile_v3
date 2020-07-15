@@ -51,4 +51,15 @@ export class NewsService {
     });
   }
 
+  getPopup() {
+    return this.http.get(this.config.get_api_url('/api/method/erpx_prulia.prulia_news.doctype.prulia_newsletter.prulia_newsletter.get_newsletter_popup')).then(res => {
+      if (res['message'] instanceof Array && res['message'].length) {
+        return res['message'];
+      }
+      else {
+        return Promise.reject();
+      }
+    });
+  }
+
 }

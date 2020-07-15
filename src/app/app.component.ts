@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Platform, LoadingController, ToastController } from '@ionic/angular';
+import {Platform, LoadingController, ToastController, ModalController} from '@ionic/angular';
 import {StatusBar} from "@ionic-native/status-bar/ngx";
 import {SplashScreen} from "@ionic-native/splash-screen/ngx";
 
@@ -9,6 +9,9 @@ import {AuthService} from './service/auth.service';
 import {Router, ActivatedRoute} from '@angular/router';
 
 import {EventBus} from "./event-bus.service";
+import {NewsModalPage} from "./news-modal/news-modal.page";
+import {MemberService} from "./service/member.service";
+import {NewsService} from "./service/news.service";
 
 @Component({
   selector: 'app-root',
@@ -29,7 +32,10 @@ export class AppComponent {
     private route: ActivatedRoute,
     private loadingController: LoadingController,
     private toastController: ToastController,
-    private events: EventBus
+    private events: EventBus,
+    private modalController: ModalController,
+    private member: MemberService,
+    private news: NewsService,
   ) {
     this.initializeApp();
   }
@@ -45,10 +51,23 @@ export class AppComponent {
     this.events.subscribe('toast', (opts) => this.presentToast(opts))
     this.events.subscribe('login', () => this.loginUser());
     this.events.subscribe('logout', () => this.logoutUser());
+    this.events.subscribe('greetings:show', async () => {
+      this.getNews().then(async (list) => {
+        let greetingModal = await this.modalController.create({
+          component: NewsModalPage,
+          cssClass: 'news-modal-popup',
+          componentProps: {
+            list: list
+          }
+        });
+        await greetingModal.present();
+      }).catch(e => {})
+    });
 
-    this.presentLoading();
+    await this.presentLoading();
     this.auth.isLoggedIn().then(() => {
       // this.router.navigate([''])
+      this.events.publish('greetings:show');
     }).catch(() => {
       this.router.navigate(['login'])
     }).finally(() => {
@@ -103,5 +122,32 @@ export class AppComponent {
         clearInterval(interval);
       }
     }, 500);
+  }
+
+  getNews() {
+    return this.member.getProfile().then(memberProfile => {
+      return this.news.getPopup().then(list => {
+        let images = [];
+
+        list = list.filter(news => {
+          let filters = ['position', 'region', 'branch'],
+              ret = true;
+
+          filters.forEach(filter => {
+            if (ret && news[filter].length && news[filter].map(el => { return el.name; }).indexOf(this.member[filter]) === -1) { ret = false; }
+          });
+
+          return ret;
+        });
+
+        if (list.length) {
+          list.forEach(news => {
+            images.push(this.config.get_service_endpoint(true) + news['news_image']);
+          })
+          return images;
+        }
+        else { return Promise.reject(); }
+      })
+    });
   }
 }
