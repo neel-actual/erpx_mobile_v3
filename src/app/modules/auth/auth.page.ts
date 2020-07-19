@@ -27,13 +27,12 @@ export class AuthPage implements OnInit {
 
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getAppVersion();
+  }
 
   async getAppVersion() {
-    window.cordova && window.cordova.getAppVersion.getVersionNumber(version => {
-      console.log(version);
-      this.app_version = version;
-    });
+    this.app_version = await this.auth.getAppVersion();
   }
 
   login(form) {

@@ -101,4 +101,13 @@ export class AuthService {
     document.cookie = "sid=" + localStorage.getItem('session_id') +
         "; expires=Fri, 31 Dec 9999 23:59:59 GMT";
   }
+
+  getAppVersion(): Promise<string> {
+    return new Promise((resolve) => {
+      if (window['cordova'] && window['cordova'].getgetAppVersion) {
+        window['cordova'] && window['cordova'].getAppVersion(v => resolve(v));
+      }
+      else { resolve('3.0.7'); }
+    });
+  }
 }

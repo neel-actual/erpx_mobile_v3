@@ -23,7 +23,7 @@ export class NewsService {
 
         for (let news of this.listing) {
           if (!news['news_image'] || news['news_image'] === null) {
-            news['news_image'] = "../www/assets/images/Prulia-word-logo.png"
+            news['news_image'] = "assets/images/Prulia-word-logo.png"
           } else if (!news['news_image'].startsWith("http")) {
             news['news_image'] = this.config.get_service_endpoint(true) + news['news_image']
           }

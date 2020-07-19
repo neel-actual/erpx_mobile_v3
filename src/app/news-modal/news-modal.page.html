@@ -1,12 +1,14 @@
 <ion-content>
-  <ion-fab vertical="top" horizontal="end" slot="fixed" (click)="dismiss()">
+  <ion-fab vertical="top" horizontal="end" slot="fixed" (click)="dismiss()" class="news-modal-popup-fab">
     <ion-fab-button size="small" color="dark">
       <ion-icon name="close"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <ion-slides class="ion-padding-top" pager="true" [options]="slideOpts">
+  <ion-slides class="ion-padding-top" pager="true" [options]="slideOpts" style="height:100%">
     <ion-slide *ngFor="let img of list">
-      <img [src]="img"/>
+      <div class="ion-padding-top bg-white">
+        <img [src]="img"/>
+      </div>
     </ion-slide>
   </ion-slides>
 

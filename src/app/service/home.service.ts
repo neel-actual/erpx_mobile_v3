@@ -23,7 +23,7 @@ export class HomeService {
 
         for (let home of this.listing) {
           if (!home['image'] || home['image'] === null) {
-            home['image'] = "../www/assets/images/Prulia-word-logo.png"
+            home['image'] = "assets/images/Prulia-word-logo.png"
           } else if (!home['image'].startsWith("http")) {
             home['image'] = this.config.get_service_endpoint(true) + home['image']
           }

@@ -10,6 +10,6 @@
 <ion-content class="ion-padding">
   <h3><b>{{ item?.title }}</b></h3>
   <p>{{item?.publish_date | date: 'MMM d, y'}}</p>
-  <img class="ion-padding-bottom" [src]="item?.news_image"/>
+  <img class="ion-padding-bottom" [src]="item?.book_image"/>
   <div [innerHtml]="item?.content"></div>
 </ion-content>

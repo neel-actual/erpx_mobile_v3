@@ -10,9 +10,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "resources": "capacitor-resources -p android,ios",
     "build:android": "ionic cordova build android",
-    "run:android": "ionic cordova run android"
+    "run:android": "ionic cordova run android",
+    "release:android": "code-push release-cordova prulia-mobile-android android"
   },
   "private": true,
   "dependencies": {
@@ -31,12 +31,19 @@
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^5.0.0",
+    "code-push": "^3.0.1",
     "cordova-android": "8.1.0",
+    "cordova-ios": "^5.1.1",
     "cordova-plugin-advanced-http": "^2.5.1",
     "cordova-plugin-app-version": "^0.1.9",
+    "cordova-plugin-code-push": "^1.12.5",
+    "cordova-plugin-dialogs": "^2.0.2",
     "cordova-plugin-file": "^6.0.2",
+    "cordova-plugin-file-transfer": "^1.7.1",
     "cordova-plugin-inappbrowser": "^4.0.0",
+    "cordova-plugin-zip": "^3.1.0",
     "ngx-mask-ionic": "^1.1.2",
+    "onesignal-cordova-plugin": "^2.11.0",
     "rxjs": "~6.5.1",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
@@ -85,7 +92,11 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-advanced-http": {},
       "cordova-plugin-app-version": {},
-      "cordova-plugin-inappbrowser": {}
+      "cordova-plugin-inappbrowser": {},
+      "onesignal-cordova-plugin": {},
+      "cordova-plugin-file-transfer": {},
+      "cordova-plugin-code-push": {},
+      "cordova-plugin-zip": {}
     },
     "platforms": [
       "android"

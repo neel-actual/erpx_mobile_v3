@@ -9,9 +9,9 @@
 
 <ion-content>
   <ion-list>
-    <ion-list-header [hidden]="list.length > 0">No News Content Setup</ion-list-header>
+    <ion-list-header [hidden]="list.length > 0">No News Found</ion-list-header>
     <ion-card *ngFor="let item of list" [routerLink]="item.name">
-      <img [src]="item.image"/>
+      <img [src]="item?.news_image"/>
       <ion-card-header>
         <ion-card-subtitle class="ion-text-center">{{ item.title }}</ion-card-subtitle>
       </ion-card-header>

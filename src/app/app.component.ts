@@ -12,6 +12,7 @@ import {EventBus} from "./event-bus.service";
 import {NewsModalPage} from "./news-modal/news-modal.page";
 import {MemberService} from "./service/member.service";
 import {NewsService} from "./service/news.service";
+import {environment} from "../environments/environment";
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,8 @@ import {NewsService} from "./service/news.service";
 export class AppComponent {
   private loader: HTMLIonLoadingElement;
   private loaderLoading = false;
+  oneSignal: any;
+  allowPush: any = false;
 
   constructor(
     private platform: Platform,
@@ -46,6 +49,7 @@ export class AppComponent {
     this.statusBar.backgroundColorByHexString('#F1646B');
     this.splashScreen.hide();
 
+    this.events.subscribe('register:push', () => this.registerPushNoti());
     this.events.subscribe('loading:start', (message = '') => this.presentLoading(message));
     this.events.subscribe('loading:end', () => this.dismissLoading());
     this.events.subscribe('toast', (opts) => this.presentToast(opts))
@@ -73,6 +77,12 @@ export class AppComponent {
     }).finally(() => {
       this.dismissLoading()
     })
+
+    await this.syncUpdates();
+  }
+
+  async syncUpdates() {
+    if (window && window['codePush']) { await window['codePush'].sync(); }
   }
 
   loginUser() {
@@ -80,9 +90,11 @@ export class AppComponent {
       replaceUrl: true
     });
     this.events.publish('greetings:show');
+    this.events.publish('register:push');
   }
 
   logoutUser() {
+    window['plugins'] && window['plugins'].OneSignal && window['plugins'].OneSignal.setSubscription(false); //deregister push notification
     this.router.navigate(['login'], {
       replaceUrl: true
     })
@@ -127,7 +139,6 @@ export class AppComponent {
 
   getNews() {
     return this.member.getProfile().then(memberProfile => {
-      console.log(memberProfile);
       return this.news.getPopup().then(list => {
         let images = [];
 
@@ -144,12 +155,78 @@ export class AppComponent {
 
         if (list.length) {
           list.forEach(news => {
-            images.push(this.config.get_service_endpoint(true) + news['news_image']);
+            console.log(news);
+            if (news['news_image']) {
+              images.push(this.config.get_service_endpoint(true) + news['news_image']);
+            }
           })
           return images;
         }
         else { return Promise.reject(); }
       })
     });
+  }
+
+  registerPushNoti() {
+    this.allowPush = true;
+
+    setTimeout(() => {
+      try {
+        this.oneSignal = this.oneSignal || window['plugins'].OneSignal;
+        //only register push noti if user is login
+        this.oneSignal.startInit(environment.ONESIGNAL_APP_ID)
+            .iOSSettings({
+              kOSSettingsKeyAutoPrompt: true,
+              kOSSettingsKeyInAppLaunchURL: false
+            })
+            .inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification)
+            .handleNotificationOpened(this.notiOpened.bind(this))
+            .endInit();
+
+        this.oneSignal.setSubscription(true);
+
+        //register tag
+        this.member.getProfile(true).then(member => {
+          let position = member['position'];
+
+          if (position) {
+            this.oneSignal.getTags(tags => {
+              if (tags.position != position) {
+                //set tag based on position
+                this.oneSignal.sendTag('position', position);
+              }
+            });
+          }
+        });
+      } catch (e) {}
+    }, 1000);
+  }
+
+  notiOpened(data) {
+    let noti = data.notification,
+        payload = noti.payload;
+
+    console.log(data);
+    if (this.allowPush) {
+      switch (payload.groupKey) {
+        case 'prulia_event':
+          this.router.navigate(['app/event'], {
+            replaceUrl: true
+          })
+          break;
+        case 'prulia_news':
+          if (payload.groupMessage) {
+            this.router.navigate(['app/more/news/' + payload.message], {
+              replaceUrl: true
+            })
+          }
+          else {
+            this.router.navigate(['app/more/news'], {
+              replaceUrl: true
+            })
+          }
+          break;
+      }
+    }
   }
 }

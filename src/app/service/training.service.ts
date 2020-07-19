@@ -29,7 +29,7 @@ export class TrainingService {
 
         for (let event of this.listing) {
           if (!event['training_image'] || event['training_image'] === null) {
-            event['training_image'] = "../www/assets/images/Prulia-word-logo.png"
+            event['training_image'] = "assets/images/Prulia-word-logo.png"
           } else if (!event['training_image'].startsWith("http")) {
             event['training_image'] = this.config.get_service_endpoint(true) + event['training_image']
           }

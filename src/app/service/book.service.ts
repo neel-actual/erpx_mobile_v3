@@ -5,7 +5,7 @@ import {HttpService} from "./http.service";
 @Injectable({
   providedIn: 'root'
 })
-export class PartnerService {
+export class BookService {
   listing: any = [];
 
   constructor(
@@ -15,17 +15,17 @@ export class PartnerService {
 
   getListing(refresh = false) {
     if (this.listing.length === 0 || refresh) {
-      return this.http.get(this.config.get_api_url('/api/method/erpx_prulia.prulia_news.doctype.prulia_banner.prulia_banner.get_banner')).then(res => {
-        console.log(res);
+        return this.http.get(this.config.get_api_url('/api/method/erpx_prulia.prulia_news.doctype.prulia_book.prulia_book.get_books_list')).then(res => {
+
         if (res['message'] instanceof Array) {
           this.listing = res['message'];
         }
 
-        for (let partner of this.listing) {
-          if (!partner['image'] || partner['image'] === null) {
-            partner['image'] = "assets/images/Prulia-word-logo.png"
-          } else if (!partner['image'].startsWith("http")) {
-            partner['image'] = this.config.get_service_endpoint(true) + partner['image']
+        for (let book of this.listing) {
+          if (!book['book_image'] || book['book_image'] === null) {
+            book['book_image'] = "assets/images/Prulia-word-logo.png"
+          } else if (!book['book_image'].startsWith("http")) {
+            book['book_image'] = this.config.get_service_endpoint(true) + book['book_image']
           }
         }
 
@@ -48,5 +48,4 @@ export class PartnerService {
       return res;
     });
   }
-
 }

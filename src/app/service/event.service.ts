@@ -28,7 +28,7 @@ export class EventService {
 
         for (let event of this.listing) {
           if (!event['event_image'] || event['event_image'] === null) {
-            event['event_image'] = "../www/assets/images/Prulia-word-logo.png"
+            event['event_image'] = "assets/images/Prulia-word-logo.png"
           } else if (!event['event_image'].startsWith("http")) {
             event['event_image'] = this.config.get_service_endpoint(true) + event['event_image']
           }

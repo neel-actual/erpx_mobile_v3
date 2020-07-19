@@ -23,6 +23,10 @@ const routes: Routes = [
   {
     path: 'feedback',
     loadChildren: () => import('../feedback/feedback.module').then( m => m.FeedbackPageModule)
+  },
+  {
+    path: 'help',
+    loadChildren: () => import('../help/help.module').then( m => m.HelpPageModule)
   }
 ];
 

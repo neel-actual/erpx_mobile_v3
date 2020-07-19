@@ -41,12 +41,30 @@
     --animation: blink-animation 1s steps(5, start) infinite;
 }
 
+//.news-modal-popup {
+//  //--background: rgba(0, 0, 0, 0.5) !important;
+//  //padding: 30% 5%  !important;
+//  .modal-wrapper {
+//    //--background: rgba(0, 0, 0, 0.5) !important;
+//  }
+//}
+
 .news-modal-popup {
-  --background: rgba(0, 0, 0, 0.5) !important;
+  --backdrop-opacity: 0;
+  --background: rgba(0, 0, 0, 0);
   padding: 30% 5%  !important;
-  .modal-wrapper {
-    --background: rgba(0, 0, 0, 0.5) !important;
+  ion-content {
+    --background: rgba(0, 0, 0, 0) no-repeat center cover;
   }
+}
+
+.news-modal-popup-fab {
+  top: 20px;
+  right: 0;
+}
+
+.bg-white {
+  background-color: white;
 }
 
 .fill-height {
