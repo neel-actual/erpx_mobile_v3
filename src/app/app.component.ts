@@ -78,7 +78,7 @@ export class AppComponent {
       this.dismissLoading()
     })
 
-    await this.syncUpdates();
+    // await this.syncUpdates();
   }
 
   async syncUpdates() {

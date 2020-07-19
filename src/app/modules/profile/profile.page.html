@@ -8,8 +8,9 @@
   <ion-grid>
     <ion-row class="ion-justify-content-center">
       <ion-item class="ion-padding" lines="none">
-        <ion-avatar class="avatar-big" >
-          <img [src]="memberProfile?.profile_photo">
+        <ion-avatar class="avatar-big" (click)="selectPicture()">
+          <img *ngIf="memberProfile?.profile_photo" [src]="memberProfile?.profile_photo">
+          <ion-icon *ngIf="!memberProfile?.profile_photo" class="avatar-big" color="tertiary" name="person-circle-outline"></ion-icon>
         </ion-avatar>
       </ion-item>
     </ion-row>

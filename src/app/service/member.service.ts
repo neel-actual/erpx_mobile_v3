@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpService} from "./http.service";
 import {ConfigService} from "./config.service";
+import { HttpClient } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +25,8 @@ export class MemberService {
 
   constructor(
       private http: HttpService,
-      private config: ConfigService
+      private config: ConfigService,
+      private httpClient: HttpClient
   ) { }
 
   getProfile(refresh = false) {
@@ -64,6 +67,53 @@ export class MemberService {
     }.bind(this));
 
     return this.memberProfile;
+  }
+
+  post_member_picture(data){
+    let member = this.memberProfile;
+
+    data.filename = member.name + '_' + data.filename;
+
+    data = Object.assign(data, {
+      from_form: 1,
+      is_private: 0,
+      cmd: 'uploadfile',
+      doctype: 'PRULIA Member',
+      docname: member.name,
+    });
+
+    return new Promise((resolve, reject) => {
+      return this.httpClient.post(
+          this.config.get_api_url(''),
+          urlEncode(data),
+          {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            withCredentials: true
+          }
+      ).subscribe(res => {
+        var msg = res['message'] || {};
+
+        this.memberProfile.profile_photo = msg.file_url;
+        this.postProfile(this.memberProfile).then(resolve).catch(reject);
+      }, (err) => {
+        console.log(err);
+        reject(err);
+      });
+    });
+
+    function urlEncode(obj) {
+      var str = [];
+
+      for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          str.push(encodeURIComponent(key) + "=" + encodeURIComponent(obj[key]))
+        }
+      }
+
+      return str.join("&");
+    }
   }
 
 }

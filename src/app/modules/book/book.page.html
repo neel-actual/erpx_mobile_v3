@@ -10,11 +10,18 @@
 <ion-content>
   <ion-list>
     <ion-list-header [hidden]="list.length > 0">No Books Found</ion-list-header>
-    <ion-card *ngFor="let item of list" [routerLink]="item.name">
-      <img [src]="item?.book_image"/>
-      <ion-card-header>
-        <ion-card-subtitle class="ion-text-center">{{ item.title }}</ion-card-subtitle>
-      </ion-card-header>
-    </ion-card>
   </ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let item of list">
+        <ion-card [routerLink]="item.name">
+          <img [src]="item?.book_image"/>
+          <ion-card-header>
+            <ion-card-subtitle class="ion-text-center">{{ item.title }}</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
 </ion-content>

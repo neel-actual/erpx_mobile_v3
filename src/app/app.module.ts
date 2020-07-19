@@ -13,6 +13,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {NgxMaskIonicModule} from 'ngx-mask-ionic';
 import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -28,7 +29,7 @@ import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     HTTP,
-    InAppBrowser
+    InAppBrowser,
   ],
   bootstrap: [AppComponent]
 })
