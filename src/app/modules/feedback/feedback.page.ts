@@ -22,7 +22,13 @@ export class FeedbackPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.feedback.get_categories().then(cats => {
+    this.feedback.get_categories(true).then(cats => {
+      this.categories = cats;
+    });
+  }
+
+  ionViewWillEnter() {
+    this.feedback.get_categories(true).then(cats => {
       this.categories = cats;
     });
   }

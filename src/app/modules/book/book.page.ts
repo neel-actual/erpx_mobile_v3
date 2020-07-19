@@ -17,4 +17,12 @@ export class BookPage implements OnInit {
     this.books.getListing().then(data => this.list = data);
   }
 
+  doRefresh($event) {
+    this.books.getListing(true)
+        .then(data => this.list = data)
+        .finally(() => {
+          $event.target.complete();
+        });
+  }
+
 }

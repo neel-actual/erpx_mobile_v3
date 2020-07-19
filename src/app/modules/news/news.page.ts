@@ -17,4 +17,12 @@ export class NewsPage implements OnInit {
     this.news.getListing().then(data => this.list = data);
   }
 
+  doRefresh($event) {
+    this.news.getListing(true)
+        .then(data => this.list = data)
+        .finally(() => {
+          $event.target.complete();
+        });
+  }
+
 }
