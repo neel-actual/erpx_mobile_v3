@@ -27,6 +27,14 @@ const routes: Routes = [
   {
     path: 'help',
     loadChildren: () => import('../help/help.module').then( m => m.HelpPageModule)
+  },
+  {
+    path: 'achievements',
+    loadChildren: () => import('../achievements/achievements.module').then( m => m.AchievementsPageModule)
+  },
+  {
+    path: 'wikipedia',
+    loadChildren: () => import('../wikipedia/wikipedia.module').then( m => m.WikipediaPageModule)
   }
 ];
 

@@ -18,7 +18,6 @@ const routes: Routes = [
     path: 'news-modal',
     loadChildren: () => import('./news-modal/news-modal.module').then( m => m.NewsModalPageModule)
   }
-
 ];
 @NgModule({
   imports: [

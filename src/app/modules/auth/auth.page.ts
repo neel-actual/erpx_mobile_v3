@@ -14,7 +14,7 @@ declare let window: any;
   styleUrls: ['./auth.page.scss'],
 })
 export class AuthPage implements OnInit {
-  app_version: string = '3.0.6';
+  app_version: string = 'v3.0.6';
 
   constructor(
       private auth: AuthService,
@@ -33,6 +33,7 @@ export class AuthPage implements OnInit {
 
   async getAppVersion() {
     this.app_version = await this.auth.getAppVersion();
+    this.app_version = 'v' + this.app_version;
   }
 
   login(form) {
