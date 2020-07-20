@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {BookService} from "../../service/book.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-book',
@@ -10,7 +11,8 @@ export class BookPage implements OnInit {
   list: any = [];
 
   constructor(
-      private books: BookService
+      private books: BookService,
+      private router: Router
   ) { }
 
   ngOnInit() {
@@ -25,4 +27,11 @@ export class BookPage implements OnInit {
         });
   }
 
+  eventTapped(item) {
+    if (item.link) {
+      window.open(item["link"], '_blank');
+    } else {
+      this.router.navigate(['/app/more/book/' + item.name]);
+    }
+  }
 }

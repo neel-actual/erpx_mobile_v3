@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NewsService} from "../../service/news.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-news',
@@ -10,7 +11,8 @@ export class NewsPage implements OnInit {
   list: any = [];
 
   constructor(
-      private news: NewsService
+      private news: NewsService,
+      private router: Router
   ) { }
 
   ngOnInit() {
@@ -25,4 +27,11 @@ export class NewsPage implements OnInit {
         });
   }
 
+  eventTapped(item) {
+    if (item["type"] === "Link") {
+      window.open(item["link"], '_blank');
+    } else {
+      this.router.navigate(['/app/more/news/' + item.name]);
+    }
+  }
 }

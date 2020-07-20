@@ -13,7 +13,7 @@
   </ion-refresher>
   <ion-list>
     <ion-list-header [hidden]="list.length > 0">No News Found</ion-list-header>
-    <ion-card *ngFor="let item of list" [routerLink]="item.name">
+    <ion-card *ngFor="let item of list" (click)="eventTapped(item)">
       <img [src]="item?.news_image"/>
       <ion-card-header>
         <ion-card-subtitle class="ion-text-center">{{ item.title }}</ion-card-subtitle>
