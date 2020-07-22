@@ -20,7 +20,7 @@
       <ion-chip [hidden]="!(!item.register && item.training_status == 'Registration Closed')" class="event-status red">
         <ion-label color="dark">Registration Closed</ion-label>
       </ion-chip>
-      <img [src]="item.training_image"/>
+      <img class="img-center" [src]="item.training_image"/>
       <ion-card-header>
         <ion-card-subtitle class="ion-text-center">
           <p class="text-bold ion-no-margin">{{ item.training_name }}<p>

@@ -16,15 +16,14 @@
   </ion-list>
   <ion-grid>
     <ion-row>
-      <ion-col size="6" *ngFor="let item of list">
+      <ion-col size="6" size-lg="4" *ngFor="let item of list">
         <ion-card (click)="eventTapped(item)">
-          <img [src]="item?.book_image"/>
+          <img class="img-center" [src]="item?.book_image"/>
           <ion-card-header>
             <ion-card-subtitle class="ion-text-center">{{ item.title }}</ion-card-subtitle>
           </ion-card-header>
         </ion-card>
       </ion-col>
     </ion-row>
-
   </ion-grid>
 </ion-content>

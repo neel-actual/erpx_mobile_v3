@@ -92,6 +92,14 @@
   }
 }
 
+.img-center {
+  align-items: center;
+  width: 100% !important;
+  height: auto !important;
+  margin: auto;
+  display: block;
+}
+
 @-webkit-keyframes blink-animation {
   to {
     visibility: hidden;
