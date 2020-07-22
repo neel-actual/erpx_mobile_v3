@@ -9,7 +9,7 @@
 
 <ion-content>
   <h3 class="ion-padding"><b>{{ item?.training_name }}</b></h3>
-  <img class="ion-padding" [src]="item?.training_image"/>
+  <img class="ion-padding img-center" [src]="item?.training_image"/>
   <div class="ion-padding-start ion-padding-end" [innerHtml]="item?.description"></div>
   <ion-list>
     <ion-item>
@@ -32,7 +32,7 @@
       Register
     </ion-button>
   </ion-list>
-  <img class="ion-padding qr-img" [hidden]="!item?.register" [src]="'https://api.qrserver.com/v1/create-qr-code/?size=480x480&data=' + qr_content">
+  <img class="ion-padding qr-img img-center" [hidden]="!item?.register" [src]="'https://api.qrserver.com/v1/create-qr-code/?size=480x480&data=' + qr_content">
   <ion-list>
     <ion-item lines="none" [hidden]="!item?.register">
       <ion-icon name="restaurant"></ion-icon>
