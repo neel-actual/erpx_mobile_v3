@@ -14,7 +14,7 @@ declare let window: any;
   styleUrls: ['./auth.page.scss'],
 })
 export class AuthPage implements OnInit {
-  app_version: string = 'v3.0.6';
+  app_version: string = 'v3.0.11';
 
   constructor(
       private auth: AuthService,
@@ -47,6 +47,9 @@ export class AuthPage implements OnInit {
 
       if (msg) {
         this.presentAlert('Error!', msg);
+      }
+      else {
+        this.presentAlert('Error!', 'Incorrect PRULIA ID or password');
       }
     });
   }

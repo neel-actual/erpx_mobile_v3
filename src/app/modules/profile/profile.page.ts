@@ -31,25 +31,29 @@ export class ProfilePage implements OnInit {
   }
 
   selectPicture() {
-    let options = { maximumImagesCount: 1 };
+    let options = { maximumImagesCount: 1, outputType: 1, disable_popover: true };
 
     window && window['imagePicker'] && window['imagePicker'].getPictures(results => {
       var result = results[0];
 
       this.events.publish('loading:start', 'Loading...');
 
-      if (result && Array.isArray(results)) {
-        window && window['plugins'] && window['plugins'].Base64.encodeFile(result, (b64: string) => {
-          b64 = b64.split('base64,').pop();
+      let b64 = result.split('base64,').pop();
 
-          this.uploadPicture(result, b64);
-        }, (err) => {
-          this._displayError(err);
-        })
-      }
-      else {
-        this.events.publish('loading:end');
-      }
+      this.uploadPicture(result, b64);
+
+      // if (result && Array.isArray(results)) {
+      //   window && window['plugins'] && window['plugins'].Base64.encodeFile(result, (b64: string) => {
+      //     b64 = b64.split('base64,').pop();
+      //
+      //     this.uploadPicture(result, b64);
+      //   }, (err) => {
+      //     this._displayError(err);
+      //   })
+      // }
+      // else {
+      //   this.events.publish('loading:end');
+      // }
     }, (err) => {
       this._displayError(err);
     }, options);

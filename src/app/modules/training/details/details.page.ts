@@ -26,7 +26,6 @@ export class DetailsPage implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.training.getItem(params.name).then(async item => {
-        console.log(item);
         this.item = item;
         this.item.member = await this.member.getProfile();
 

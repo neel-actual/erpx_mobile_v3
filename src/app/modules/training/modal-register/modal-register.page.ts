@@ -52,7 +52,6 @@ export class ModalRegisterPage implements OnInit {
   }
 
   async _displayAckError() {
-    console.log("No acknowledgement");
     let alert = await this.alert.create({
       header: 'Alert',
       message: 'Please kindly acknowledge the declaration by clicking the checkbox in the form',

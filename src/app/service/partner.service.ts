@@ -16,7 +16,6 @@ export class PartnerService {
   getListing(refresh = false) {
     if (this.listing.length === 0 || refresh) {
       return this.http.get(this.config.get_api_url('/api/method/erpx_prulia.prulia_news.doctype.prulia_banner.prulia_banner.get_banner')).then(res => {
-        console.log(res);
         if (res['message'] instanceof Array) {
           this.listing = res['message'];
         }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HomeService} from "../../service/home.service";
 import {Router} from "@angular/router";
+import {EventBus} from "../../event-bus.service";
 
 @Component({
   selector: 'app-home',
@@ -12,11 +13,16 @@ export class HomePage implements OnInit {
 
   constructor(
       private home: HomeService,
-      private router: Router
+      private router: Router,
+      private events: EventBus
   ) {}
 
   ngOnInit() {
     this.home.getListing(true).then(data => this.list = data);
+
+    this.events.subscribe('login', () => {
+      this.home.getListing(true).then(data => this.list = data);
+    });
   }
 
   ionViewWillEnter() {

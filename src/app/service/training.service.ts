@@ -22,7 +22,6 @@ export class TrainingService {
       return this.http.get(this.config.get_api_url('/api/method/erpx_prulia.prulia_trainings.doctype.prulia_training.prulia_training.get_training_list'), {
         member_name: member_profile.name
       }).then(res => {
-        console.log(res);
         if (res['message'] instanceof Array) {
           this.listing = res['message'];
         }

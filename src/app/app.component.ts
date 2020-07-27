@@ -155,7 +155,6 @@ export class AppComponent {
 
         if (list.length) {
           list.forEach(news => {
-            console.log(news);
             if (news['news_image']) {
               images.push(this.config.get_service_endpoint(true) + news['news_image']);
             }
@@ -206,7 +205,6 @@ export class AppComponent {
     let noti = data.notification,
         payload = noti.payload;
 
-    console.log(data);
     if (this.allowPush) {
       switch (payload.groupKey) {
         case 'prulia_event':

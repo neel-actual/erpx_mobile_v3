@@ -25,7 +25,7 @@
     "@capacitor/android": "^2.2.0",
     "@capacitor/core": "2.2.0",
     "@ionic-native/app-version": "^5.27.0",
-    "@ionic-native/base64": "^5.27.0",
+    "@ionic-native/code-push": "^5.27.0",
     "@ionic-native/core": "^5.0.7",
     "@ionic-native/http": "^5.26.0",
     "@ionic-native/image-picker": "^5.27.0",
@@ -33,19 +33,16 @@
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^5.0.0",
-    "code-push": "^3.0.1",
-    "com-badrit-base64": "^0.2.0",
     "cordova-android": "8.1.0",
     "cordova-ios": "^5.1.1",
     "cordova-plugin-advanced-http": "^2.5.1",
     "cordova-plugin-app-version": "^0.1.9",
-    "cordova-plugin-code-push": "^1.12.5",
-    "cordova-plugin-dialogs": "^2.0.2",
     "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-file-transfer": "^1.7.1",
     "cordova-plugin-inappbrowser": "^4.0.0",
     "cordova-plugin-telerik-imagepicker": "^2.3.3",
     "cordova-plugin-zip": "^3.1.0",
+    "ionic-native-http-connection-backend": "^8.0.0",
     "ngx-mask-ionic": "^1.1.2",
     "onesignal-cordova-plugin": "^2.11.0",
     "rxjs": "~6.5.1",
@@ -97,17 +94,16 @@
       "cordova-plugin-advanced-http": {},
       "cordova-plugin-app-version": {},
       "cordova-plugin-inappbrowser": {},
-      "onesignal-cordova-plugin": {},
       "cordova-plugin-file-transfer": {},
-      "cordova-plugin-code-push": {},
       "cordova-plugin-zip": {},
       "cordova-plugin-telerik-imagepicker": {
-        "PHOTO_LIBRARY_USAGE_DESCRIPTION": " "
+        "PHOTO_LIBRARY_USAGE_DESCRIPTION": "This app requires access to the photo library."
       },
-      "com-badrit-base64": {}
+      "onesignal-cordova-plugin": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ]
   }
 }

@@ -60,7 +60,6 @@ export class EventService {
     return this.http.post(this.config.get_api_url('/api/method/erpx_prulia.prulia_events.doctype.prulia_event.prulia_event.get_lang'), {
       position: position
     }).then(res => {
-      console.log(res);
       return res['message'] || [];
     });
   }

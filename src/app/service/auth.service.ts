@@ -25,7 +25,6 @@ export class AuthService {
     let credentials = {usr: usr, pwd: pwd, device: "mobile"};
 
     return this.http.post(this.config.get_api_url('/api/method/login'), credentials).then(data => {
-      console.log(data);
       localStorage.setItem('user', usr);
       let cookie = this.config.getCookies(document.cookie);
       localStorage.setItem('session_id', cookie['sid']);
@@ -104,10 +103,10 @@ export class AuthService {
 
   getAppVersion(): Promise<string> {
     return new Promise((resolve) => {
-      if (window['cordova'] && window['cordova'].getgetAppVersion) {
+      if (window['cordova'] && window['cordova'].getAppVersion) {
         window['cordova'] && window['cordova'].getAppVersion(v => resolve(v));
       }
-      else { resolve('3.0.7'); }
+      else { resolve('3.0.11'); }
     });
   }
 }

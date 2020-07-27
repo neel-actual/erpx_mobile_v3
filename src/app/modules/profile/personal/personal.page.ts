@@ -37,7 +37,7 @@ export class PersonalPage implements OnInit {
         message: 'Information updated'
       })
     }).catch((e) => {
-      console.log(e);
+      console.error(e);
       this.events.publish('toast', {
         message: e.error ? e.error.message : 'Forbidden',
         color: 'danger'

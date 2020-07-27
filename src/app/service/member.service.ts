@@ -98,7 +98,6 @@ export class MemberService {
         this.memberProfile.profile_photo = msg.file_url;
         this.postProfile(this.memberProfile).then(resolve).catch(reject);
       }, (err) => {
-        console.log(err);
         reject(err);
       });
     });
