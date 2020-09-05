@@ -21,6 +21,7 @@ export class MemberService {
     profile_photo: string,
     region: string,
     shirt_size: string,
+    position: string
   };
 
   constructor(

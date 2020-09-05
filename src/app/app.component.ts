@@ -186,18 +186,25 @@ export class AppComponent {
 
         //register tag
         this.member.getProfile(true).then(member => {
-          let position = member['position'];
+          let { branch, position, region } = member;
 
-          if (position) {
-            this.oneSignal.getTags(tags => {
-              if (tags.position != position) {
-                //set tag based on position
-                this.oneSignal.sendTag('position', position);
-              }
-            });
-          }
+          this.oneSignal.getTags(tags => {
+            if (tags.position != position) {
+              this.oneSignal[position ? 'sendTag' : 'deleteTag']('position', position);
+            }
+
+            if (tags.branch != branch) {
+              this.oneSignal[branch ? 'sendTag' : 'deleteTag']('branch', branch);
+            }
+
+            if (tags.region != region) {
+              this.oneSignal[region ? 'sendTag' : 'deleteTag']('region', region);
+            }
+          });
         });
-      } catch (e) {}
+      } catch (e) {
+        console.error(e);
+      }
     }, 1000);
   }
 
@@ -211,6 +218,11 @@ export class AppComponent {
           this.router.navigate(['app/event'], {
             replaceUrl: true
           })
+          break;
+        case 'prulia_training':
+          this.router.navigate(['app/training'], {
+            replaceUrl: true
+          });
           break;
         case 'prulia_news':
           if (payload.groupMessage) {

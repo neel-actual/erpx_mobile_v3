@@ -36,6 +36,8 @@ export class ProfilePage implements OnInit {
     window && window['imagePicker'] && window['imagePicker'].getPictures(results => {
       var result = results[0];
 
+      if (!result) return;
+
       this.events.publish('loading:start', 'Loading...');
 
       let b64 = result.split('base64,').pop();
