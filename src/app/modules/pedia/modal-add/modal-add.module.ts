@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { WikipediaPageRoutingModule } from './wikipedia-routing.module';
+import { ModalAddPageRoutingModule } from './modal-add-routing.module';
 
-import { WikipediaPage } from './wikipedia.page';
+import { ModalAddPage } from './modal-add.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    WikipediaPageRoutingModule
+    ModalAddPageRoutingModule
   ],
-  declarations: [WikipediaPage]
+  declarations: [ModalAddPage]
 })
-export class WikipediaPageModule {}
+export class ModalAddPageModule {}

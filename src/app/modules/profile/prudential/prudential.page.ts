@@ -1,24 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import {MemberService} from "../../../service/member.service";
+import { MemberService } from '../../../service/member.service';
 
 @Component({
-  selector: 'app-prudential',
-  templateUrl: './prudential.page.html',
-  styleUrls: ['./prudential.page.scss'],
+	selector: 'app-prudential',
+	templateUrl: './prudential.page.html',
+	styleUrls: ['./prudential.page.scss'],
 })
 export class PrudentialPage implements OnInit {
-  memberProfile: any;
+	memberProfile: any;
 
-  constructor(
-      private member: MemberService,
-  ) { }
+	constructor(private member: MemberService) {}
 
-  ngOnInit() {
-    this.getMember();
-  }
+	ngOnInit() {
+		this.getMember();
+	}
 
-  async getMember() {
-    this.memberProfile = await this.member.getProfile();
-  }
-
+	async getMember() {
+		this.memberProfile = await this.member.getProfile();
+	}
 }

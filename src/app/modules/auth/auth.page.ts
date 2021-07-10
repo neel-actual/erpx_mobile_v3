@@ -1,83 +1,85 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../service/auth.service';
-import {Router} from '@angular/router';
-import {AlertController} from "@ionic/angular";
-import {EventBus} from "../../event-bus.service";
-import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
-import {ConfigService} from "../../service/config.service";
+import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
+import { EventBus } from '../../event-bus.service';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { ConfigService } from '../../service/config.service';
 
 declare let window: any;
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.page.html',
-  styleUrls: ['./auth.page.scss'],
+	selector: 'app-auth',
+	templateUrl: './auth.page.html',
+	styleUrls: ['./auth.page.scss'],
 })
 export class AuthPage implements OnInit {
-  app_version: string = 'v3.0.11';
+	app_version: string = 'v3.0.11';
 
-  constructor(
-      private auth: AuthService,
-      private router: Router,
-      private alert: AlertController,
-      private events: EventBus,
-      private iab: InAppBrowser,
-      private config: ConfigService
-  ) {
+	constructor(
+		private auth: AuthService,
+		private router: Router,
+		private alert: AlertController,
+		private events: EventBus,
+		private iab: InAppBrowser,
+		private config: ConfigService
+	) {}
 
-  }
+	ngOnInit() {
+		this.getAppVersion();
+	}
 
-  ngOnInit() {
-    this.getAppVersion();
-  }
+	async getAppVersion() {
+		this.app_version = await this.auth.getAppVersion();
+		this.app_version = 'v' + this.app_version;
+	}
 
-  async getAppVersion() {
-    this.app_version = await this.auth.getAppVersion();
-    this.app_version = 'v' + this.app_version;
-  }
+	login(form) {
+		let { username, password } = form.value;
 
-  login(form) {
-    let { username, password } = form.value;
+		return this.auth
+			.login(username, password)
+			.then(data => {
+				form.reset();
+				this.events.publish('login', '');
+			})
+			.catch(e => {
+				let msg = e && e.error && e.error.message;
 
-    return this.auth.login(username, password).then(data => {
-      form.reset();
-      this.events.publish('login', '');
-    }).catch((e) => {
-      let msg = e && e.error && e.error.message;
+				if (msg) {
+					this.presentAlert('Error!', msg);
+				} else {
+					this.presentAlert('Error!', 'Incorrect PRULIA ID or password');
+				}
+			});
+	}
 
-      if (msg) {
-        this.presentAlert('Error!', msg);
-      }
-      else {
-        this.presentAlert('Error!', 'Incorrect PRULIA ID or password');
-      }
-    });
-  }
+	async presentAlert(title, message) {
+		let alert = await this.alert.create({
+			header: title,
+			message: message,
+			buttons: ['OK'],
+		});
 
-  async presentAlert(title, message) {
-    let alert = await this.alert.create({
-      header: title,
-      message: message,
-      buttons: ['OK']
-    });
+		await alert.present();
+	}
 
-    await alert.present();
-  }
+	register() {
+		const browser = this.iab.create(
+			this.config.get_api_url('/member-registration'),
+			'_blank',
+			'location=no'
+		);
 
-  register() {
-    const browser = this.iab.create(this.config.get_api_url('/member-registration'), '_blank',
-        'location=no');
-
-    browser.on("loadstop")
-        .subscribe(
-            (evt) => {
-              if (evt.url.match("registration-complete")) {
-                browser.close();
-              }
-            },
-            err => {
-              console.log("InAppBrowser loadstop Event Error: " + err);
-            });
-  }
-
+		browser.on('loadstop').subscribe(
+			evt => {
+				if (evt.url.match('registration-complete')) {
+					browser.close();
+				}
+			},
+			err => {
+				console.log('InAppBrowser loadstop Event Error: ' + err);
+			}
+		);
+	}
 }

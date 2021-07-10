@@ -9,12 +9,7 @@ import { MorePageRoutingModule } from './more-routing.module';
 import { MorePage } from './more.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    MorePageRoutingModule
-  ],
-  declarations: [MorePage]
+	imports: [CommonModule, FormsModule, IonicModule, MorePageRoutingModule],
+	declarations: [MorePage],
 })
 export class MorePageModule {}

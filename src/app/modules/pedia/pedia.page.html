@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start" *ngIf="!showSearch">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="!showSearch">Pedia</ion-title>
+    <ion-buttons slot="end" *ngIf="!showSearch">
+      <ion-button (click)="showSearch = true">
+        <ion-icon name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-searchbar style="padding-bottom: 0;" color="transparent" animated="true" *ngIf="showSearch" [(ngModel)]="search" showCancelButton="always" (ionCancel)="showSearch = false" (ionChange)="doRefresh()" debounce="500"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true"
+             (ionScroll)="onScroll($event)">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list [hidden]="list.length > 0">
+    <ion-list-header >No Pedia Found</ion-list-header>
+  </ion-list>
+    <ion-grid>
+      <ion-row>
+        <ion-col *ngFor="let item of list" [routerLink]="item.name" size="12" size-sm="6" size-lg="4">
+          <ion-card class="ion-no-margin">
+            <ion-card-header>
+              <ion-card-subtitle>
+                <p class="text-bold">{{ item.title }}<p>
+                <p>By {{ item.full_name }}</p>
+
+              </ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-chip [hidden]="!item.category" class="">
+                <ion-label color="">{{ item.category }}</ion-label>
+              </ion-chip>
+              <ion-chip [hidden]="!item.other_cat" class="">
+                <ion-label color="">{{ item.other_cat }}</ion-label>
+              </ion-chip>
+              <p class="ion-text-right">
+                {{ item.published_date | date: 'd MMM y' }}
+              </p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addPedia()" style="transition: transform 0.2s ease-in-out;" [ngStyle]="{'transform': showFab ? 'translateY(0)' : 'translateY(100px)'}">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+

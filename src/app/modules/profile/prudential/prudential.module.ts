@@ -9,12 +9,7 @@ import { PrudentialPageRoutingModule } from './prudential-routing.module';
 import { PrudentialPage } from './prudential.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    PrudentialPageRoutingModule
-  ],
-  declarations: [PrudentialPage]
+	imports: [CommonModule, FormsModule, IonicModule, PrudentialPageRoutingModule],
+	declarations: [PrudentialPage],
 })
 export class PrudentialPageModule {}

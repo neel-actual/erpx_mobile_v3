@@ -4,18 +4,18 @@ import { Routes, RouterModule } from '@angular/router';
 import { NewsPage } from './news.page';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: NewsPage
-  },
-  {
-    path: ':name',
-    loadChildren: () => import('./details/details.module').then( m => m.DetailsPageModule)
-  }
+	{
+		path: '',
+		component: NewsPage,
+	},
+	{
+		path: ':name',
+		loadChildren: () => import('./details/details.module').then(m => m.DetailsPageModule),
+	},
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+	imports: [RouterModule.forChild(routes)],
+	exports: [RouterModule],
 })
 export class NewsPageRoutingModule {}

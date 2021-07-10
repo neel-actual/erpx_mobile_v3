@@ -9,12 +9,7 @@ import { FeedbackPageRoutingModule } from './feedback-routing.module';
 import { FeedbackPage } from './feedback.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    FeedbackPageRoutingModule
-  ],
-  declarations: [FeedbackPage]
+	imports: [CommonModule, FormsModule, IonicModule, FeedbackPageRoutingModule],
+	declarations: [FeedbackPage],
 })
 export class FeedbackPageModule {}

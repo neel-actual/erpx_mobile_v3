@@ -9,12 +9,7 @@ import { NewsModalPageRoutingModule } from './news-modal-routing.module';
 import { NewsModalPage } from './news-modal.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    NewsModalPageRoutingModule
-  ],
-  declarations: [NewsModalPage]
+	imports: [CommonModule, FormsModule, IonicModule, NewsModalPageRoutingModule],
+	declarations: [NewsModalPage],
 })
 export class NewsModalPageModule {}

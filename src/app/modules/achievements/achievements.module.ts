@@ -9,12 +9,7 @@ import { AchievementsPageRoutingModule } from './achievements-routing.module';
 import { AchievementsPage } from './achievements.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    AchievementsPageRoutingModule
-  ],
-  declarations: [AchievementsPage]
+	imports: [CommonModule, FormsModule, IonicModule, AchievementsPageRoutingModule],
+	declarations: [AchievementsPage],
 })
 export class AchievementsPageModule {}

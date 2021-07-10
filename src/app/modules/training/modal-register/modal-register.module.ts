@@ -9,12 +9,7 @@ import { ModalRegisterPageRoutingModule } from './modal-register-routing.module'
 import { ModalRegisterPage } from './modal-register.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    ModalRegisterPageRoutingModule
-  ],
-  declarations: [ModalRegisterPage]
+	imports: [CommonModule, FormsModule, IonicModule, ModalRegisterPageRoutingModule],
+	declarations: [ModalRegisterPage],
 })
 export class ModalRegisterPageModule {}

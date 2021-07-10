@@ -9,12 +9,7 @@ import { BookPageRoutingModule } from './book-routing.module';
 import { BookPage } from './book.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    BookPageRoutingModule
-  ],
-  declarations: [BookPage]
+	imports: [CommonModule, FormsModule, IonicModule, BookPageRoutingModule],
+	declarations: [BookPage],
 })
 export class BookPageModule {}

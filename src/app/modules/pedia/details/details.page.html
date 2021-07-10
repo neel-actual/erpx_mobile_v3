@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      {{ item?.title }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true"
+             (ionScroll)="onScroll($event)">
+  <ion-header class="ion-no-border">
+    <ion-toolbar color="light">
+      <p class="ion-padding-horizontal">
+        <span class="ion-text-right">By {{ item?.full_name }}</span>
+        <span class="ion-float-end">{{ item?.published_date | date: 'd MMM y' }}</span>
+      </p>
+    </ion-toolbar>
+  </ion-header>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list *ngFor="let section of sections">
+      <ion-list-header lines="inset" class="ion-no-padding ion-padding-horizontal">
+        <ion-label>{{ section.label }}</ion-label>
+      </ion-list-header>
+      <ion-item *ngFor="let field of section.fields">
+        <ion-label disabled>{{ field.label }}:</ion-label>
+
+        <ion-input *ngIf="field.fieldtype === 'Data' || field.fieldtype === 'Select' || field.fieldtype === 'Attach'
+                          || field.fieldtype === 'Date' || field.fieldtype === 'Datetime'"
+                   [ngModel]="item[field.fieldname]" disabled>
+        </ion-input>
+
+        <ion-checkbox *ngIf="field.fieldtype === 'Check'" slot="end" [ngModel]="item[field.fieldname]" disabled>
+        </ion-checkbox>
+
+        <ion-textarea *ngIf="field.fieldtype === 'Long Text'" [ngModel]="item[field.fieldname]"
+                auto-grow disabled>
+        </ion-textarea>
+      </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-list-header lines="inset" class="ion-no-padding ion-padding-horizontal">
+      <ion-label>Comments <ion-badge>{{ comments.length | number:'1.0':'en-US' }}</ion-badge>
+      </ion-label>
+    </ion-list-header>
+    <ng-container *ngFor="let comment of comments">
+      <ion-item-sliding #slidingItem>
+        <ion-item>
+          <ion-fab-button size="small" slot="start">
+            {{ shortName(comment?.commenter_name) }}
+          </ion-fab-button>
+          <ion-label class="ion-text-wrap">
+            <p style="white-space: pre-line;">{{ comment.comment }}</p>
+            <ion-text color="dark">
+              <p style="font-size: 12px;" class="ion-padding-top">By {{ comment?.commenter_name }}</p>
+              <p style="font-size: 12px">{{ comment?.comment_date | date: 'd MMM y, h:mm a' }}</p>
+            </ion-text>
+          </ion-label>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option (click)="onComment(comment.name, slidingItem)">Reply</ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+      <ion-list lines="full"
+                style="border-left: 1px dotted var(--ion-item-border-color, var(--ion-border-color, var(--ion-color-step-250, #c8c7cc)));margin-left: 40px;"
+                *ngIf="replies[comment.name]?.length">
+            <ion-item style="padding-left: 30px;" class="ion-no-padding" *ngFor="let reply of replies[comment.name]">
+              <ion-fab-button slot="start" size="small" style="margin-right: 12px">
+                {{ shortName(reply?.commenter_name) }}
+              </ion-fab-button>
+              <ion-label class="ion-text-wrap">
+                <p style="white-space: pre-line;">{{ reply.comment }}</p>
+                <ion-text color="dark">
+                  <p style="font-size: 12px;" class="ion-padding-top">By {{ reply?.commenter_name }}</p>
+                  <p style="font-size: 12px">{{ reply?.comment_date | date: 'd MMM y, h:mm a' }}</p>
+                </ion-text>
+              </ion-label>
+            </ion-item>
+      </ion-list>
+    </ng-container>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="onComment()" style="transition: transform 0.2s ease-in-out;" [ngStyle]="{'transform': showFab ? 'translateY(0)' : 'translateY(100px)'}">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

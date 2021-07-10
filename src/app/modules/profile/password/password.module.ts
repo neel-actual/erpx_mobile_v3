@@ -9,12 +9,7 @@ import { PasswordPageRoutingModule } from './password-routing.module';
 import { PasswordPage } from './password.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    PasswordPageRoutingModule
-  ],
-  declarations: [PasswordPage]
+	imports: [CommonModule, FormsModule, IonicModule, PasswordPageRoutingModule],
+	declarations: [PasswordPage],
 })
 export class PasswordPageModule {}

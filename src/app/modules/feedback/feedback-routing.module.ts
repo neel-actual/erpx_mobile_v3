@@ -4,14 +4,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { FeedbackPage } from './feedback.page';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: FeedbackPage
-  }
+	{
+		path: '',
+		component: FeedbackPage,
+	},
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+	imports: [RouterModule.forChild(routes)],
+	exports: [RouterModule],
 })
 export class FeedbackPageRoutingModule {}

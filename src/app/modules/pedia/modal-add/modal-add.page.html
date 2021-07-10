@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button *ngIf="mode" (click)="mode = null">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button  (click)="dismiss()">Close</ion-button>
+    </ion-buttons>
+    <ion-title>Add New Pedia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid *ngIf="!mode">
+    <ion-row>
+      <ion-col size="12">
+        <ion-card (click)="mode = 'help'">
+          <ion-card-header class="ion-text-center">
+            <ion-avatar style="margin: auto;">
+              <ion-icon size="large" color="primary" name="help-outline"></ion-icon>
+            </ion-avatar>
+          </ion-card-header>
+          <ion-card-content class="ion-text-center">
+            I need help
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="12">
+        <ion-card (click)="mode = 'feedback'">
+          <ion-card-header class="ion-text-center">
+            <ion-avatar style="margin: auto;">
+              <ion-icon size="large" color="primary" name="chatbox-ellipses-outline"></ion-icon>
+            </ion-avatar>
+          </ion-card-header>
+          <ion-card-content class="ion-text-center">
+            I would like to provide feedback
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <form *ngIf="mode" #form="ngForm" (ngSubmit)="submit(form.form.controls)">
+      <ion-list  *ngFor="let section of (mode === 'feedback' ? feedbackSections : helpSections)">
+        <ion-list-header lines="inset" class="ion-no-padding ion-padding-horizontal">
+          <h5 class="text-bold">{{ section.label }}</h5>
+        </ion-list-header>
+        <ng-container *ngFor="let field of section.fields">
+          <ion-item >
+            <ion-label class="ion-text-wrap" [color]="form.form.controls[field.fieldname]?.valid ? '' : 'danger'">{{ field.label }}:</ion-label>
+
+            <ion-checkbox [name]="field.fieldname" *ngIf="field.fieldtype === 'Check'" slot="end" [disabled]="!!field.read_only" ngModel [required]="!!field.reqd">
+            </ion-checkbox>
+
+            <ion-input [name]="field.fieldname" *ngIf="field.fieldtype === 'Data'"
+                       [readonly]="!!field.read_only" [(ngModel)]="data[field.fieldname]" ngModel [required]="!!field.reqd">
+            </ion-input>
+
+
+            <ion-input [name]="field.fieldname" *ngIf="field.fieldtype === 'Attach'" ngModel [required]="!!field.reqd" type="file"
+                        (change)="attachFile($event, field.fieldname)">
+              <span *ngIf="field.fieldtype === 'Attach' && uploadedFiles[field.fieldname]">{{ sanitizeFileName(form.form.controls[field.fieldname]?.value) }}</span>
+            </ion-input>
+
+
+            <ion-select [name]="field.fieldname" *ngIf="field.fieldtype === 'Select'" ngModel [required]="!!field.reqd">
+              <ion-select-option *ngFor="let item of splitOptions(field.options)" [disabled]="item.startsWith('*')">
+                {{ replaceHeader(item) }}
+              </ion-select-option>
+            </ion-select>
+
+            <ion-datetime [name]="field.fieldname" *ngIf="field.fieldtype === 'Date'" displayFormat="DD MMM YYYY" [placeholder]="field.placeholder"
+                          [required]="!!field.reqd" ngModel>
+            </ion-datetime>
+
+            <ion-textarea [name]="field.fieldname" *ngIf="field.fieldtype === 'Long Text'" [required]="!!field.reqd" [placeholder]="field.default"
+                          [readonly]="!!field.default || !!field.read_only" auto-grow ngModel>
+            </ion-textarea>
+          </ion-item>
+        </ng-container>
+      </ion-list>
+    <ion-button type="submit" color="primary" expand="block" [disabled]="!form.form.valid">Submit</ion-button>
+  </form>
+</ion-content>

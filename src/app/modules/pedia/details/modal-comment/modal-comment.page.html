@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-button  (click)="dismiss(false)">Close</ion-button>
+    </ion-buttons>
+    <ion-title>Add comment</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list lines="full" class="ion-padding-vertical">
+    <ion-item>
+      <ion-textarea auto-grow autofocus placeholder="Leave a comment..." [(ngModel)]="comment"></ion-textarea>
+    </ion-item>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-button disabled="{{!comment.length}}" (click)="dismiss()">
+      Submit
+    </ion-button>
+  </ion-fab>
+</ion-content>
