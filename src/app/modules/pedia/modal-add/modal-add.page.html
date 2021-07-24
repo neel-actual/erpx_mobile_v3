@@ -42,9 +42,9 @@
     </ion-row>
   </ion-grid>
   <form *ngIf="mode" #form="ngForm" (ngSubmit)="submit(form.form.controls)">
-      <ion-list  *ngFor="let section of (mode === 'feedback' ? feedbackSections : helpSections)">
+      <ion-list  *ngFor="let section of (mode === 'feedback' ? feedbackSections : helpSections); index as i;">
         <ion-list-header lines="inset" class="ion-no-padding ion-padding-horizontal">
-          <h5 class="text-bold">{{ section.label }}</h5>
+          <h5 class="text-bold">{{ i + 1 }}. {{ section.label }}</h5>
         </ion-list-header>
         <ng-container *ngFor="let field of section.fields">
           <ion-item >

@@ -123,7 +123,8 @@ export class ModalAddPage implements OnInit {
 		return new Promise((resolve, reject) => {
 			const reader = new FileReader();
 			reader.readAsDataURL(file);
-			reader.onload = () => resolve(reader.result.split('base64,').pop().trim());
+			// @ts-ignore
+			reader.onload = () => resolve(reader.result?.split('base64,').pop().trim());
 			reader.onerror = error => reject(error);
 		});
 	}
